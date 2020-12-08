@@ -27,4 +27,5 @@ Route::group(['middleware' => 'api'], function ($router) {
 
     //pasien    
     Route::get('pasien', 'Api\PasienController@index');
+    Route::get('pasien/belumPe', 'Api\PasienController@belumPe');
 });
