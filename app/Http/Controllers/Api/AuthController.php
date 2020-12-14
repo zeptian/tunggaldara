@@ -49,7 +49,7 @@ class AuthController extends Controller
         return response()->json([
             'status'    => true,
             'message'   => 'ok',
-            'data'      => auth()->user(),
+            'data'      => auth('api')->user(),
         ]);
     }
 }

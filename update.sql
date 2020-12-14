@@ -1,35 +1,10 @@
 ALTER TABLE `user`
 ADD `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
-ALTER TABLE `copy_pe`
-DROP `nama_cp`,
-DROP `nama_cp2`,
-DROP `telp_cp`,
-DROP `telp_cp2`,
-DROP `status_pekerjaan`,
-DROP `pekerjaan`,
-DROP `almt_pekerjaan`,
-DROP `wilayah`,
-DROP `c_index`,
-DROP `cl_panjang`,
-DROP `laporan`,
-DROP `perjalanan`,
-DROP `frekuensi`,
-DROP `jml_pe`,
-DROP `jml_pos`,
-DROP `jml_larv`,
-DROP `liter_larv`,
-DROP `panas`,
-DROP `tdbd`,
-DROP `dbd`,
-DROP `dss`,
-DROP `jml_suluh`,
-DROP `kesimpulan`,
-DROP `uraian`,
-DROP `sasaran`,
-DROP `target`,
-DROP `ketr`,
-DROP `tgl_verifikasi`,
-DROP `verifikator`,
-DROP `fogging`,
-RENAME TO `lampiran_pe`;
+ALTER TABLE `pjr`
+ADD `created_at` timestamp NULL,
+ADD `updated_at` timestamp NULL AFTER `created_at`;
+
+ALTER TABLE `pjn`
+CHANGE `submited_at` `created_at` timestamp NULL AFTER `jml_positif`
+ADD `updated_at` timestamp NULL AFTER `created_at`;

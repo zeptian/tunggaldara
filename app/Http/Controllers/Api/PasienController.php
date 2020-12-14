@@ -28,17 +28,19 @@ class PasienController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-        }
-        $pasien = Pasien::join('kasus', 'kasus.idp', '=', 'pasien.id')->whereBetween('tgl_lp', [$start, $end])->whereIn('kdesa', $kels)->get();
-        if ($pasien) {
+            $pasien = Pasien::join('kasus', 'kasus.idp', '=', 'pasien.id')->whereBetween('tgl_lp', [$start, $end])->whereIn('kdesa', $kels)->get();
+
             $this->status = true;
             $this->message = 'ok';
-            return response()->json([
-                'status'    => $this->status,
-                'message'   => $this->message,
-                'data'      => $pasien,
-            ]);
+            $this->data = $pasien;
+        } else {
+            $this->message = 'Anauthorized';
         }
+        return response()->json([
+            'status'    => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->data,
+        ]);
     }
 
     public function belumPe(Request $request)
@@ -52,16 +54,57 @@ class PasienController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-        }
-        $pasien = Pasien::join('kasus', 'kasus.idp', '=', 'pasien.id')->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')->whereBetween('tgl_lp', [$start, $end])->whereIn('kdesa', $kels)->get();
-        if ($pasien) {
+
+            $pasien = Pasien::select('nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'jenis', 'tgl_lp', 'rs', 'status', 'tgl_pe')
+                ->join('kasus', 'kasus.idp', '=', 'pasien.id')
+                ->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')
+                ->where('tgl_pe', null)
+                ->whereBetween('tgl_lp', [$start, $end])
+                ->whereIn('kdesa', $kels)
+                ->get();
+
             $this->status = true;
             $this->message = 'ok';
-            return response()->json([
-                'status'    => $this->status,
-                'message'   => $this->message,
-                'data'      => $pasien,
-            ]);
+            $this->data = $pasien;
+        } else {
+            $this->message = 'Anauthorized';
         }
+        return response()->json([
+            'status'    => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->data,
+        ]);
+    }
+    public function sudahPe(Request $request)
+    {
+        $start = $request->input('start');
+        $end = $request->input('end');
+        $user = auth('api')->user();
+        if ($user->level == 'puskesmas') {
+            $kode = $user->kpusk;
+            $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
+            foreach ($kels as $k => $v) {
+                $kels[] = $v->kode;
+            }
+
+            $pasien = Pasien::select('nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'jenis', 'tgl_lp', 'rs', 'status', 'tgl_pe')
+                ->join('kasus', 'kasus.idp', '=', 'pasien.id')
+                ->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')
+                ->where('tgl_pe', '!=', null)
+                ->whereBetween('tgl_lp', [$start, $end])
+                ->whereIn('kdesa', $kels)
+                ->get();
+
+            $this->status = true;
+            $this->message = 'ok';
+            $this->data = $pasien;
+        } else {
+            $this->message = 'Anauthorized';
+        }
+        return response()->json([
+            'status'    => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->data,
+        ]);
     }
 }

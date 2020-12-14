@@ -25,7 +25,25 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'Api\AuthController@refresh');
     Route::get('me', 'Api\AuthController@me');
 
-    //pasien    
+    //PUSKESMAS
+    //PASIEN    
     Route::get('pasien', 'Api\PasienController@index');
     Route::get('pasien/belumPe', 'Api\PasienController@belumPe');
+    Route::get('pasien/sudahPe', 'Api\PasienController@sudahPe');
+    //PE
+    Route::get('pasien/pe', 'Api\PeController@store');
+    //PJN
+    Route::get('pjn', 'Api\PjnController@index');
+    Route::post('pjn', 'Api\PjnController@store');
+    Route::get('pjn/{id}', 'Api\PjnController@show');
+    Route::put('pjn/{id}', 'Api\PjnController@update');
+    Route::delete('pjn/{id}', 'Api\PjnController@destroy');
+
+    // KADER
+    //PJR
+    Route::get('pjr', 'Api\PjrController@index');
+    Route::post('pjr', 'Api\PjrController@store');
+    Route::get('pjr/{id}', 'Api\PjrController@show');
+    Route::put('pjr/{id}', 'Api\PjrController@update');
+    Route::delete('pjr/{id}', 'Api\PjrController@destroy');
 });
