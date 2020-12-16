@@ -55,7 +55,7 @@ class PasienController extends Controller
                 $kels[] = $v->kode;
             }
 
-            $pasien = Pasien::select('nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'jenis', 'tgl_lp', 'rs', 'status', 'tgl_pe')
+            $pasien = Pasien::select('kasus.idk', 'nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'jenis', 'tgl_lp', 'rs', 'status', 'tgl_pe')
                 ->join('kasus', 'kasus.idp', '=', 'pasien.id')
                 ->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')
                 ->where('tgl_pe', null)

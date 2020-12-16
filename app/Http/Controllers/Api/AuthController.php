@@ -27,7 +27,7 @@ class AuthController extends Controller
             $token = auth('api')->login($au);
             $this->status = true;
             $this->message = 'ok';
-            $this->data = ['access_token' => $token, 'token_type' => 'bearer', 'expires_in' => 3600];
+            $this->data = ['lokasi' => $au->lokasi, 'kode' => $au->kpusk, 'nama' => $au->nama, 'level' => $au->level, 'access_token' => $token, 'token_type' => 'bearer', 'expires_in' => 3600];
         }
         return response()->json([
             'status'    => $this->status,

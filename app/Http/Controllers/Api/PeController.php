@@ -41,7 +41,7 @@ class PeController extends Controller
                 'jml_pos'        => 'required',
                 'jml_larv'       => 'required',
                 'panas'          => 'required',
-                'tdbd'           => 'required',
+                'dd'             => 'required',
                 'dbd'            => 'required',
                 'dss'            => 'required',
                 'kesimpulan'     => 'required',
@@ -69,7 +69,7 @@ class PeController extends Controller
                 $pjr->jml_pos        = $request->jml_pos;
                 $pjr->jml_larv       = $request->jml_larv;
                 $pjr->panas          = $request->panas;
-                $pjr->tdbd           = $request->tdbd;
+                $pjr->tdbd           = $request->dd;
                 $pjr->dbd            = $request->dbd;
                 $pjr->dss            = $request->dss;
                 $pjr->kesimpulan     = $request->kesimpulan;
