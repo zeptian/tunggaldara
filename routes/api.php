@@ -32,12 +32,20 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('pasien/sudahPe', 'Api\PasienController@sudahPe');
     //PE
     Route::post('pasien/pe', 'Api\PeController@store');
+    Route::get('pasien/detail/{id}', 'Api\PeController@show');
+    Route::put('pasien/pe/{id}', 'Api\PeController@update');
     //PJN
     Route::get('pjn', 'Api\PjnController@index');
     Route::post('pjn', 'Api\PjnController@store');
     Route::get('pjn/{id}', 'Api\PjnController@show');
     Route::put('pjn/{id}', 'Api\PjnController@update');
     Route::delete('pjn/{id}', 'Api\PjnController@destroy');
+    //PJB
+    Route::get('pjb', 'Api\PjbController@index');
+    Route::post('pjb', 'Api\PjbController@store');
+    Route::get('pjb/{id}', 'Api\PjbController@show');
+    Route::put('pjb/{id}', 'Api\PjbController@update');
+    Route::delete('pjb/{id}', 'Api\PjbController@destroy');
 
     // KADER
     //PJR
