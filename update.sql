@@ -17,3 +17,7 @@ ALTER TABLE `pe`
 ADD `user`  VARCHAR(255) NULL AFTER `ketr`,
 ADD `created_at` timestamp NULL AFTER `fogging`,
 ADD `updated_at` timestamp NULL AFTER `created_at`;
+
+
+ALTER TABLE `sicentik`
+CHANGE `last_update` `updated_at` timestamp NULL AFTER `created_at`;
