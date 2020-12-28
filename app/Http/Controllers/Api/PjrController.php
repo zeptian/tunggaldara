@@ -28,7 +28,7 @@ class PjrController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $pjr = Pjr::where([['kdesa', $kode], ['tahun', $tahun], ['bulan', $bulan]])->get();
+            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')->where([['kdesa', $kode], ['tahun', $tahun], ['bulan', $bulan]])->get();
 
             $this->status = true;
             $this->message = 'ok';
@@ -148,7 +148,7 @@ class PjrController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $pjr = Pjr::where([['kdesa', $kode], ['id', $id]])->first();
+            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')->where([['kdesa', $kode], ['id', $id]])->first();
             if (!empty($pjr)) {
                 $this->status = true;
                 $this->message = 'ok';

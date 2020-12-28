@@ -32,13 +32,13 @@ class PjnController extends Controller
             $this->code = 401;
         } else {
             if ($kel != '') {
-                $pjn = Pjn::where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])->get();
+                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])->get();
             } else {
                 $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
                 foreach ($kels as $k => $v) {
                     $kels[] = $v->kode;
                 }
-                $pjn = Pjn::where([['tahun', $tahun], ['bulan', $bulan]])
+                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where([['tahun', $tahun], ['bulan', $bulan]])
                     ->whereIn('kdesa', $kels)
                     ->get();
             }
@@ -64,7 +64,7 @@ class PjnController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-            $pjn = Pjn::where('id', $id)->whereIn('kdesa', $kels)->first();
+            $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where('id', $id)->whereIn('kdesa', $kels)->first();
             // dd($pjn);
             if (!empty($pjn)) {
                 $this->status = true;

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('logout', 'Api\AuthController@logout');
     Route::post('refresh', 'Api\AuthController@refresh');
     Route::get('me', 'Api\AuthController@me');
+    Route::get('kelurahan', 'Api\RefController@kelurahan');
 
     //PUSKESMAS
     //PASIEN    
