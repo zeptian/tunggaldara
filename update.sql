@@ -6,7 +6,7 @@ ADD `created_at` timestamp NULL,
 ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `pjn`
-CHANGE `submited_at` `created_at` timestamp NULL AFTER `jml_positif`
+ADD `created_at` timestamp NULL AFTER `jml_positif`
 ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `pjb`
@@ -21,3 +21,7 @@ ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `sicentik`
 CHANGE `last_update` `updated_at` timestamp NULL AFTER `created_at`;
+
+ALTER TABLE `pjr`
+ADD `jml_perangkap` int(11) NULL AFTER `jml_positif`,
+ADD `jml_tikus` int(11) NULL AFTER `jml_perangkap`;

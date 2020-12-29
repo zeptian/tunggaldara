@@ -56,6 +56,8 @@ class PjrController extends Controller
                 'rw'            => 'required|numeric',
                 'jml_rumah'     => 'required|numeric',
                 'jml_positif'   => 'required|numeric',
+                'jml_perangkap' => 'required|numeric',
+                'jml_tikus'     => 'required|numeric',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -75,6 +77,8 @@ class PjrController extends Controller
                 $pjr->kdesa           = $user_id;
                 $pjr->jml_rumah       = $request->jml_rumah;
                 $pjr->jml_positif     = $request->jml_positif;
+                $pjr->jml_perangkap   = $request->jml_perangkap;
+                $pjr->jml_tikus       = $request->jml_tikus;
 
                 if ($pjr->save()) {
                     $this->status = true;
@@ -106,6 +110,8 @@ class PjrController extends Controller
                 'rw'            => 'required|numeric',
                 'jml_rumah'     => 'required|numeric',
                 'jml_positif'   => 'required|numeric',
+                'jml_perangkap' => 'required|numeric',
+                'jml_tikus'     => 'required|numeric',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -125,6 +131,8 @@ class PjrController extends Controller
                 $pjr->kdesa           = $user_id;
                 $pjr->jml_rumah       = $request->jml_rumah;
                 $pjr->jml_positif     = $request->jml_positif;
+                $pjr->jml_perangkap   = $request->jml_perangkap;
+                $pjr->jml_tikus       = $request->jml_tikus;
 
                 if ($pjr->save()) {
                     $this->status = true;

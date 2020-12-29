@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Kasus;
+use App\Pasien;
 use App\Pe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -106,6 +108,8 @@ class PeController extends Controller
                 'dbd'            => 'required',
                 'dss'            => 'required',
                 'kesimpulan'     => 'required',
+                'latitude'       => 'required',
+                'longitude'      => 'required',
             ];
             $validatedData = Validator::make($request->all(), $rules);
             if ($validatedData->fails()) {
@@ -135,6 +139,11 @@ class PeController extends Controller
                 $pjr->dss            = $request->dss;
                 $pjr->kesimpulan     = $request->kesimpulan;
                 $pjr->user           = $user->kpusk;
+
+                $idp = Kasus::select('idp')->where('idk', $request->id_kasus)->first();
+                $pasien = Pasien::where('id', $idp->idp)->first();
+                $pasien->latlong          = $request->latitude . "," . $request->longitude;
+                $pasien->save();
 
                 if ($pjr->save()) {
                     $this->status = true;
@@ -178,6 +187,8 @@ class PeController extends Controller
                 'dbd'            => 'required',
                 'dss'            => 'required',
                 'kesimpulan'     => 'required',
+                'latitude'       => 'required',
+                'longitude'      => 'required',
             ];
             $validatedData = Validator::make($request->all(), $rules);
             if ($validatedData->fails()) {
