@@ -28,7 +28,11 @@ class PjrController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')->where([['kdesa', $kode], ['tahun', $tahun], ['bulan', $bulan]])->get();
+            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')
+                ->where([['kdesa', $kode], ['tahun', $tahun], ['bulan', $bulan]])
+                ->orderBy('tahun', 'desc')
+                ->orderBy('bulan', 'desc')
+                ->get();
 
             $this->status = true;
             $this->message = 'ok';

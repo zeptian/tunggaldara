@@ -61,6 +61,7 @@ class PasienController extends Controller
                 ->where('tgl_pe', null)
                 ->whereBetween('tgl_lp', [$start, $end])
                 ->whereIn('kdesa', $kels)
+                ->orderBy('tgl_lp', 'desc')
                 ->get();
 
             $this->status = true;
@@ -93,6 +94,7 @@ class PasienController extends Controller
                 ->where('tgl_pe', '!=', null)
                 ->whereBetween('tgl_lp', [$start, $end])
                 ->whereIn('kdesa', $kels)
+                ->orderBy('tgl_lp', 'desc')
                 ->get();
 
             $this->status = true;

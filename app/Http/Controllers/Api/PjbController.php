@@ -32,14 +32,21 @@ class PjbController extends Controller
             $this->code = 401;
         } else {
             if ($kel != '') {
-                $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])->get();
+                $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
+                    ->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])
+                    ->orderBy('tahun', 'desc')
+                    ->orderBy('bulan', 'desc')
+                    ->get();
             } else {
                 $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
                 foreach ($kels as $k => $v) {
                     $kels[] = $v->kode;
                 }
-                $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')->where([['tahun', $tahun], ['bulan', $bulan]])
+                $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
+                    ->where([['tahun', $tahun], ['bulan', $bulan]])
                     ->whereIn('kdesa', $kels)
+                    ->orderBy('tahun', 'desc')
+                    ->orderBy('bulan', 'desc')
                     ->get();
             }
             $this->status = true;
@@ -64,7 +71,12 @@ class PjbController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-            $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')->where('id', $id)->whereIn('kdesa', $kels)->first();
+            $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
+                ->where('id', $id)
+                ->whereIn('kdesa', $kels)
+                ->orderBy('tahun', 'desc')
+                ->orderBy('bulan', 'desc')
+                ->first();
             // dd($pjn);
             if (!empty($pjn)) {
                 $this->status = true;

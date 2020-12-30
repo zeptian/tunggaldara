@@ -32,14 +32,21 @@ class PjnController extends Controller
             $this->code = 401;
         } else {
             if ($kel != '') {
-                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])->get();
+                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')
+                    ->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])
+                    ->orderBy('tahun', 'desc')
+                    ->orderBy('bulan', 'desc')
+                    ->get();
             } else {
                 $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
                 foreach ($kels as $k => $v) {
                     $kels[] = $v->kode;
                 }
-                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where([['tahun', $tahun], ['bulan', $bulan]])
+                $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')
+                    ->where([['tahun', $tahun], ['bulan', $bulan]])
                     ->whereIn('kdesa', $kels)
+                    ->orderBy('tahun', 'desc')
+                    ->orderBy('bulan', 'desc')
                     ->get();
             }
             $this->status = true;
