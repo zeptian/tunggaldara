@@ -33,6 +33,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('pasien/sudahPe', 'Api\PasienController@sudahPe');
     //PE
     Route::post('pasien/pe', 'Api\PeController@store');
+    Route::post('pasien/pe/lokasi', 'Api\PeController@storeLoc');
     Route::get('pasien/detail/{id}', 'Api\PeController@show');
     Route::put('pasien/pe/{id}', 'Api\PeController@update');
     //PJN
