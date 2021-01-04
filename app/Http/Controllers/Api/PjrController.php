@@ -62,6 +62,7 @@ class PjrController extends Controller
                 'jml_positif'   => 'required|numeric',
                 'jml_perangkap' => 'required|numeric',
                 'jml_tikus'     => 'required|numeric',
+                'pelapor'       => 'required',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -83,6 +84,7 @@ class PjrController extends Controller
                 $pjr->jml_positif     = $request->jml_positif;
                 $pjr->jml_perangkap   = $request->jml_perangkap;
                 $pjr->jml_tikus       = $request->jml_tikus;
+                $pjr->no_pengirim         = $request->pelapor;
 
                 if ($pjr->save()) {
                     $this->status = true;
@@ -116,6 +118,7 @@ class PjrController extends Controller
                 'jml_positif'   => 'required|numeric',
                 'jml_perangkap' => 'required|numeric',
                 'jml_tikus'     => 'required|numeric',
+                'pelapor'       => 'required',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -137,6 +140,7 @@ class PjrController extends Controller
                 $pjr->jml_positif     = $request->jml_positif;
                 $pjr->jml_perangkap   = $request->jml_perangkap;
                 $pjr->jml_tikus       = $request->jml_tikus;
+                $pjr->no_pengirim         = $request->pelapor;
 
                 if ($pjr->save()) {
                     $this->status = true;
