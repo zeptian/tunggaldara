@@ -41,6 +41,18 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('pjn/{id}', 'Api\PjnController@show');
     Route::put('pjn/{id}', 'Api\PjnController@update');
     Route::delete('pjn/{id}', 'Api\PjnController@destroy');
+    // Laporan PJN
+    Route::get('lap_pjn', 'Api\LapPjnController@index');
+    Route::post('lap_pjn', 'Api\LapPjnController@store');
+    Route::get('lap_pjn/{id}', 'Api\LapPjnController@show');
+    Route::put('lap_pjn/{id}', 'Api\LapPjnController@update');
+    Route::delete('lap_pjn/{id}', 'Api\LapPjnController@destroy');
+    // PJR Gasurkes
+    Route::get('pjg', 'Api\PjgController@index');
+    Route::post('pjg', 'Api\PjgController@store');
+    Route::get('pjg/{id}', 'Api\PjgController@show');
+    Route::put('pjg/{id}', 'Api\PjgController@update');
+    Route::delete('pjg/{id}', 'Api\PjgController@destroy');
     //PJB
     Route::get('pjb', 'Api\PjbController@index');
     Route::post('pjb', 'Api\PjbController@store');
