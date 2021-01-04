@@ -159,6 +159,43 @@ class PeController extends Controller
             'data'      => $this->data,
         ], $this->code);
     }
+    public function storeLoc(Request $request)
+    {
+        $user = auth('api')->user();
+        if (!$user->level == 'kader') {
+            $this->message = 'Anauthorized';
+            $this->code = 401;
+        } else {
+            $rules = [
+                'id_kasus'       => 'required|unique:pe,idk',
+                'latitude'       => 'required',
+                'longitude'      => 'required',
+            ];
+            $validatedData = Validator::make($request->all(), $rules);
+            if ($validatedData->fails()) {
+                $this->status = false;
+                $this->code = 422;
+                $this->message = $validatedData->errors();
+            } else {
+
+                $idp = Kasus::select('idp')->where('idk', $request->id_kasus)->first();
+                $pasien = Pasien::where('id', $idp->idp)->first();
+                $pasien->latlong          = $request->latitude . "," . $request->longitude;
+
+                if ($pasien->save()) {
+                    $this->status = true;
+                    $this->code = 201;
+                    $this->message = "created";
+                    $this->data = $request->input();
+                }
+            }
+        }
+        return response()->json([
+            'status'    => $this->status,
+            'message'   => $this->message,
+            'data'      => $this->data,
+        ], $this->code);
+    }
 
     public function update(Request $request, $id)
     {
