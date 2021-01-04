@@ -34,8 +34,8 @@ class PjbController extends Controller
             if ($kel != '') {
                 $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
                     ->where([['tahun', $tahun], ['bulan', $bulan], ['kdesa', $kel]])
-                    ->orderBy('tahun', 'desc')
-                    ->orderBy('bulan', 'desc')
+                    ->orderBy('tahun', 'asc')
+                    ->orderBy('bulan', 'asc')
                     ->get();
             } else {
                 $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
@@ -45,8 +45,8 @@ class PjbController extends Controller
                 $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
                     ->where([['tahun', $tahun], ['bulan', $bulan]])
                     ->whereIn('kdesa', $kels)
-                    ->orderBy('tahun', 'desc')
-                    ->orderBy('bulan', 'desc')
+                    ->orderBy('tahun', 'asc')
+                    ->orderBy('bulan', 'asc')
                     ->get();
             }
             $this->status = true;
@@ -74,8 +74,8 @@ class PjbController extends Controller
             $pjn = Pjb::join('desa', 'desa.kode', '=', 'pjb.kdesa')
                 ->where('id', $id)
                 ->whereIn('kdesa', $kels)
-                ->orderBy('tahun', 'desc')
-                ->orderBy('bulan', 'desc')
+                ->orderBy('tahun', 'asc')
+                ->orderBy('bulan', 'asc')
                 ->first();
             // dd($pjn);
             if (!empty($pjn)) {

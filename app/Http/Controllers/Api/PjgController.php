@@ -28,8 +28,8 @@ class PjgController extends Controller
             $this->code = 401;
         } else {
             $pjg = Pjg::where([['tahun', $tahun], ['puskesmas', $kode]])
-                ->orderBy('tahun', 'desc')
-                ->orderBy('bulan', 'desc')
+                ->orderBy('tahun', 'asc')
+                ->orderBy('bulan', 'asc')
                 ->get();
             $this->status = true;
             $this->message = 'ok';
@@ -51,8 +51,8 @@ class PjgController extends Controller
         } else {
             $pjg = Pjg::where('id', $id)
                 ->whereIn('puskesmas', $kode)
-                ->orderBy('tahun', 'desc')
-                ->orderBy('bulan', 'desc')
+                ->orderBy('tahun', 'asc')
+                ->orderBy('bulan', 'asc')
                 ->first();
             // dd($pjg);
             if (!empty($pjg)) {

@@ -28,7 +28,11 @@ class PasienController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-            $pasien = Pasien::join('kasus', 'kasus.idp', '=', 'pasien.id')->whereBetween('tgl_lp', [$start, $end])->whereIn('kdesa', $kels)->get();
+            $pasien = Pasien::join('kasus', 'kasus.idp', '=', 'pasien.id')
+                ->whereBetween('tgl_lp', [$start, $end])
+                ->whereIn('kdesa', $kels)
+                ->orderBy('tgl_lp', 'asc')
+                ->get();
 
             $this->status = true;
             $this->message = 'ok';
@@ -61,7 +65,7 @@ class PasienController extends Controller
                 ->where('tgl_pe', null)
                 ->whereBetween('tgl_lp', [$start, $end])
                 ->whereIn('kdesa', $kels)
-                ->orderBy('tgl_lp', 'desc')
+                ->orderBy('tgl_lp', 'asc')
                 ->get();
 
             $this->status = true;
@@ -94,7 +98,7 @@ class PasienController extends Controller
                 ->where('tgl_pe', '!=', null)
                 ->whereBetween('tgl_lp', [$start, $end])
                 ->whereIn('kdesa', $kels)
-                ->orderBy('tgl_lp', 'desc')
+                ->orderBy('tgl_lp', 'asc')
                 ->get();
 
             $this->status = true;

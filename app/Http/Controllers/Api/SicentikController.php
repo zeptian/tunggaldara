@@ -27,7 +27,9 @@ class SicentikController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $sicentik = Sicentik::where([['tahun', $tahun], ['user', $kode]])->get();
+            $sicentik = Sicentik::where([['tahun', $tahun], ['user', $kode]])
+                ->orderBy('bulan', 'asc')
+                ->get();
 
             $this->status = true;
             $this->message = 'ok';

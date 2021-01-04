@@ -28,10 +28,11 @@ class PjrController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')
+            $pjr = Pjr::select('tanggal', 'minggu_ke', 'bulan', 'tahun', 'rt', 'rw', 'jml_rumah', 'jml_positif', 'jml_perangkap', 'jml_tikus', 'no_pengirim as pelapor', 'kdesa', 'nama')
+                ->join('desa', 'desa.kode', '=', 'pjr.kdesa')
                 ->where([['kdesa', $kode], ['tahun', $tahun], ['bulan', $bulan]])
-                ->orderBy('tahun', 'desc')
-                ->orderBy('bulan', 'desc')
+                ->orderBy('tahun', 'asc')
+                ->orderBy('bulan', 'asc')
                 ->get();
 
             $this->status = true;
@@ -164,7 +165,10 @@ class PjrController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $pjr = Pjr::join('desa', 'desa.kode', '=', 'pjr.kdesa')->where([['kdesa', $kode], ['id', $id]])->first();
+            $pjr = Pjr::select('tanggal', 'minggu_ke', 'bulan', 'tahun', 'rt', 'rw', 'jml_rumah', 'jml_positif', 'jml_perangkap', 'jml_tikus', 'no_pengirim as pelapor', 'kdesa', 'nama')
+                ->join('desa', 'desa.kode', '=', 'pjr.kdesa')
+                ->where([['kdesa', $kode], ['id', $id]])
+                ->first();
             if (!empty($pjr)) {
                 $this->status = true;
                 $this->message = 'ok';
