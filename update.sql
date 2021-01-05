@@ -6,7 +6,7 @@ ADD `created_at` timestamp NULL,
 ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `pjn`
-ADD `created_at` timestamp NULL AFTER `jml_positif`
+ADD `created_at` timestamp NULL AFTER `jml_positif`,
 ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `pjb`
