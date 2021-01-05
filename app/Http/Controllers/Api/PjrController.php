@@ -72,9 +72,9 @@ class PjrController extends Controller
                 $this->code = 422;
                 $this->message = $validatedData->errors();
             } else if (Pjr::where([
-                ['minggu_ke' => $request->minggu_ke], ['bulan' => $request->bulan],
-                ['tahun' => $request->tahun], ['rt' => $request->rt],
-                ['rw' => $request->rw], ['kdesa' => $user->kpusk],
+                ['minggu_ke', $request->minggu_ke], ['bulan', $request->bulan],
+                ['tahun', $request->tahun], ['rt', $request->rt],
+                ['rw', $request->rw], ['kdesa', $user->kpusk],
             ])->first()) {
                 $this->status = false;
                 $this->code = 422;
