@@ -66,7 +66,12 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('sicentik/{id}', 'Api\SicentikController@show');
     Route::put('sicentik/{id}', 'Api\SicentikController@update');
     Route::delete('sicentik/{id}', 'Api\SicentikController@destroy');
-
+    //SRSJ
+    Route::get('srsj', 'Api\SrsjController@index');
+    Route::post('srsj', 'Api\SrsjController@store');
+    Route::get('srsj/{id}', 'Api\SrsjController@show');
+    Route::put('srsj/{id}', 'Api\SrsjController@update');
+    Route::delete('srsj/{id}', 'Api\SrsjController@destroy');
     // KADER
     //PJR
     Route::get('pjr', 'Api\PjrController@index');

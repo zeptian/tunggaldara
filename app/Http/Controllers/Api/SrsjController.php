@@ -190,7 +190,7 @@ class SrsjController extends Controller
             $this->message = 'Anauthorized';
             $this->code = 401;
         } else {
-            $srsj = Srsj::where([['id', $id], ['user', $kode]])->delete();
+            $srsj = Srsj::where([['id', $id], ['puskesmas', $kode]])->delete();
             if ($srsj) {
                 $this->status = true;
                 $this->code = 202;
