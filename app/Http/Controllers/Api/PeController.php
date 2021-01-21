@@ -210,7 +210,6 @@ class PeController extends Controller
                 'telp_cp'        => 'required',
                 'status_pekerjaan' => 'required',
                 'pekerjaan'      => 'required',
-                'almt_pekerjaan' => 'required',
                 'wilayah'        => 'required',
                 'c_index'        => 'required',
                 'cl_panjang'     => 'required',
