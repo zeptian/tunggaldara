@@ -117,36 +117,36 @@ class PeController extends Controller
                 $this->code = 422;
                 $this->message = $validatedData->errors();
             } else {
-                $pjr = new Pe();
-                $pjr->idk       = $request->id_kasus;
-                $pjr->idpe          = $request->id_pe;
-                $pjr->tgl_pe         = date("Y-m-d", strtotime($request->tgl_pe));
-                $pjr->nama_cp        = $request->nama_cp;
-                $pjr->telp_cp        = $request->telp_cp;
-                $pjr->status_pekerjaan  = $request->status_pekerjaan;
-                $pjr->pekerjaan      = $request->pekerjaan;
-                $pjr->almt_pekerjaan = $request->almt_pekerjaan;
-                $pjr->wilayah        = $request->wilayah;
-                $pjr->c_index        = $request->c_index;
-                $pjr->cl_panjang     = $request->cl_panjang;
-                $pjr->perjalanan     = $request->perjalanan;
-                $pjr->jml_pe         = $request->jml_pe;
-                $pjr->jml_pos        = $request->jml_pos;
-                $pjr->jml_larv       = $request->jml_larv;
-                $pjr->panas          = $request->panas;
-                $pjr->tdbd           = $request->dd;
-                $pjr->dbd            = $request->dbd;
-                $pjr->dss            = $request->dss;
-                $pjr->kesimpulan     = $request->kesimpulan;
-                $pjr->fogging     = $request->fogging;
-                $pjr->user           = $user->kpusk;
+                $pe = new Pe();
+                $pe->idk       = $request->id_kasus;
+                $pe->idpe          = $request->id_pe;
+                $pe->tgl_pe         = date("Y-m-d", strtotime($request->tgl_pe));
+                $pe->nama_cp        = $request->nama_cp;
+                $pe->telp_cp        = $request->telp_cp;
+                $pe->status_pekerjaan  = $request->status_pekerjaan;
+                $pe->pekerjaan      = $request->pekerjaan;
+                $pe->almt_pekerjaan = $request->almt_pekerjaan;
+                $pe->wilayah        = $request->wilayah;
+                $pe->c_index        = $request->c_index;
+                $pe->cl_panjang     = $request->cl_panjang;
+                $pe->perjalanan     = $request->perjalanan;
+                $pe->jml_pe         = $request->jml_pe;
+                $pe->jml_pos        = $request->jml_pos;
+                $pe->jml_larv       = $request->jml_larv;
+                $pe->panas          = $request->panas;
+                $pe->tdbd           = $request->dd;
+                $pe->dbd            = $request->dbd;
+                $pe->dss            = $request->dss;
+                $pe->kesimpulan     = $request->kesimpulan;
+                $pe->fogging     = $request->fogging;
+                $pe->user           = $user->kpusk;
 
                 $idp = Kasus::select('idp')->where('idk', $request->id_kasus)->first();
                 $pasien = Pasien::where('id', $idp->idp)->first();
                 $pasien->latlong          = $request->latitude . "," . $request->longitude;
                 $pasien->save();
 
-                if ($pjr->save()) {
+                if ($pe->save()) {
                     $this->status = true;
                     $this->code = 201;
                     $this->message = "created";
@@ -233,30 +233,30 @@ class PeController extends Controller
                 $this->code = 422;
                 $this->message = $validatedData->errors();
             } else {
-                $pjr = Pe::where('idk', $id)->first();
-                $pjr->idpe          = $request->id_pe;
-                $pjr->tgl_pe         = date("Y-m-d", strtotime($request->tgl_pe));
-                $pjr->nama_cp        = $request->nama_cp;
-                $pjr->telp_cp        = $request->telp_cp;
-                $pjr->status_pekerjaan  = $request->status_pekerjaan;
-                $pjr->pekerjaan      = $request->pekerjaan;
-                $pjr->almt_pekerjaan = $request->almt_pekerjaan;
-                $pjr->wilayah        = $request->wilayah;
-                $pjr->c_index        = $request->c_index;
-                $pjr->cl_panjang     = $request->cl_panjang;
-                $pjr->perjalanan     = $request->perjalanan;
-                $pjr->jml_pe         = $request->jml_pe;
-                $pjr->jml_pos        = $request->jml_pos;
-                $pjr->jml_larv       = $request->jml_larv;
-                $pjr->panas          = $request->panas;
-                $pjr->tdbd           = $request->dd;
-                $pjr->dbd            = $request->dbd;
-                $pjr->dss            = $request->dss;
-                $pjr->kesimpulan     = $request->kesimpulan;
-                $pjr->fogging     = $request->fogging;
-                $pjr->user           = $user->kpusk;
+                $pe = Pe::where('idk', $id)->first();
+                $pe->idpe          = $request->id_pe;
+                $pe->tgl_pe         = date("Y-m-d", strtotime($request->tgl_pe));
+                $pe->nama_cp        = $request->nama_cp;
+                $pe->telp_cp        = $request->telp_cp;
+                $pe->status_pekerjaan  = $request->status_pekerjaan;
+                $pe->pekerjaan      = $request->pekerjaan;
+                $pe->almt_pekerjaan = $request->almt_pekerjaan;
+                $pe->wilayah        = $request->wilayah;
+                $pe->c_index        = $request->c_index;
+                $pe->cl_panjang     = $request->cl_panjang;
+                $pe->perjalanan     = $request->perjalanan;
+                $pe->jml_pe         = $request->jml_pe;
+                $pe->jml_pos        = $request->jml_pos;
+                $pe->jml_larv       = $request->jml_larv;
+                $pe->panas          = $request->panas;
+                $pe->tdbd           = $request->dd;
+                $pe->dbd            = $request->dbd;
+                $pe->dss            = $request->dss;
+                $pe->kesimpulan     = $request->kesimpulan;
+                $pe->fogging     = $request->fogging;
+                $pe->user           = $user->kpusk;
 
-                if ($pjr->save()) {
+                if ($pe->save()) {
                     $this->status = true;
                     $this->code = 202;
                     $this->message = "Updated";
