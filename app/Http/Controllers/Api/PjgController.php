@@ -50,7 +50,7 @@ class PjgController extends Controller
             $this->code = 401;
         } else {
             $pjg = Pjg::where('id', $id)
-                ->whereIn('puskesmas', $kode)
+                ->where('puskesmas', $kode)
                 ->orderBy('tahun', 'asc')
                 ->orderBy('bulan', 'asc')
                 ->first();

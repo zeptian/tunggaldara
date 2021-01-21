@@ -71,7 +71,7 @@ class PjnController extends Controller
             foreach ($kels as $k => $v) {
                 $kels[] = $v->kode;
             }
-            $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where('id', $id)->whereIn('kdesa', $kels)->first();
+            $pjn = Pjn::join('desa', 'desa.kode', '=', 'pjn.kdesa')->where('id', $id)->where('kdesa', $kels)->first();
             // dd($pjn);
             if (!empty($pjn)) {
                 $this->status = true;
