@@ -59,7 +59,8 @@ class PeController extends Controller
                 'tdbd',
                 'dbd',
                 'dss',
-                'kesimpulan'
+                'kesimpulan',
+                'fogging'
             )
                 ->join('kasus', 'pe.idk', '=', 'kasus.idk')
                 ->join('pasien', 'pasien.id', '=', 'kasus.idp')
@@ -137,6 +138,7 @@ class PeController extends Controller
                 $pjr->dbd            = $request->dbd;
                 $pjr->dss            = $request->dss;
                 $pjr->kesimpulan     = $request->kesimpulan;
+                $pjr->fogging     = $request->fogging;
                 $pjr->user           = $user->kpusk;
 
                 $idp = Kasus::select('idp')->where('idk', $request->id_kasus)->first();
@@ -251,6 +253,7 @@ class PeController extends Controller
                 $pjr->dbd            = $request->dbd;
                 $pjr->dss            = $request->dss;
                 $pjr->kesimpulan     = $request->kesimpulan;
+                $pjr->fogging     = $request->fogging;
                 $pjr->user           = $user->kpusk;
 
                 if ($pjr->save()) {
