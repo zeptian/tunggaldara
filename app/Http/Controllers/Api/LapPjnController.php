@@ -78,8 +78,12 @@ class LapPjnController extends Controller
                 'bulan'         => 'required|numeric',
                 'tahun'         => 'required|numeric',
                 'minggu_ke'         => 'required|numeric',
+                'jml_rw'        => 'required|numeric',
                 'jml_kelurahan'     => 'required|numeric',
+                'jml_rw_melaksanakan'        => 'required|numeric',
                 'jml_kelurahan_melaksanakan'   => 'required|numeric',
+                'jml_rw_melaksanakan_ptp'        => 'required|numeric',
+                'jml_kelurahan_melaksanakan_ptp'   => 'required|numeric',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -94,8 +98,12 @@ class LapPjnController extends Controller
                 $pjn->bulan           = $request->bulan;
                 $pjn->tahun           = $request->tahun;
                 $pjn->minggu_ke       = $request->minggu_ke;
+                $pjn->jml_rw          = $request->jml_rw;
                 $pjn->jml_kelurahan       = $request->jml_kelurahan;
+                $pjn->jml_rw_melaksanakan          = $request->jml_rw_melaksanakan;
                 $pjn->jml_kelurahan_melaksanakan     = $request->jml_kelurahan_melaksanakan;
+                $pjn->jml_rw_melaksanakan_ptp          = $request->jml_rw_melaksanakan_ptp;
+                $pjn->jml_kelurahan_melaksanakan_ptp     = $request->jml_kelurahan_melaksanakan_ptp;
 
                 if ($pjn->save()) {
                     $this->status = true;
@@ -123,8 +131,12 @@ class LapPjnController extends Controller
                 'bulan'         => 'required|numeric',
                 'tahun'         => 'required|numeric',
                 'minggu_ke'         => 'required|numeric',
+                'jml_rw'        => 'required|numeric',
                 'jml_kelurahan'     => 'required|numeric',
+                'jml_rw_melaksanakan'        => 'required|numeric',
                 'jml_kelurahan_melaksanakan'   => 'required|numeric',
+                'jml_rw_melaksanakan_ptp'        => 'required|numeric',
+                'jml_kelurahan_melaksanakan_ptp'   => 'required|numeric',
             ];
 
             $validatedData = Validator::make($request->all(), $rules);
@@ -138,8 +150,12 @@ class LapPjnController extends Controller
                 $pjn->bulan           = $request->bulan;
                 $pjn->tahun           = $request->tahun;
                 $pjn->minggu_ke       = $request->minggu_ke;
+                $pjn->jml_rw          = $request->jml_rw;
                 $pjn->jml_kelurahan       = $request->jml_kelurahan;
+                $pjn->jml_rw_melaksanakan          = $request->jml_rw_melaksanakan;
                 $pjn->jml_kelurahan_melaksanakan     = $request->jml_kelurahan_melaksanakan;
+                $pjn->jml_rw_melaksanakan_ptp          = $request->jml_rw_melaksanakan_ptp;
+                $pjn->jml_kelurahan_melaksanakan_ptp     = $request->jml_kelurahan_melaksanakan_ptp;
 
                 if ($pjn->save()) {
                     $this->status = true;
