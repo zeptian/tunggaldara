@@ -108,7 +108,7 @@ class SrsjController extends Controller
                 $srsj->abj_koord        = $request->abj_koord;
                 $srsj->abj_nakes        = $request->abj_nakes;
                 $srsj->jml_dd           = $request->jml_dd;
-                $srsj->jml_dbd          = $request->jml_dd;
+                $srsj->jml_dbd          = $request->jml_dbd;
                 $srsj->jml_dss          = $request->jml_dss;
 
                 if ($srsj->save()) {
@@ -165,7 +165,7 @@ class SrsjController extends Controller
                 $srsj->abj_koord        = $request->abj_koord;
                 $srsj->abj_nakes        = $request->abj_nakes;
                 $srsj->jml_dd           = $request->jml_dd;
-                $srsj->jml_dbd          = $request->jml_dd;
+                $srsj->jml_dbd          = $request->jml_dbd;
                 $srsj->jml_dss          = $request->jml_dss;
 
                 if ($srsj->save()) {
