@@ -60,10 +60,11 @@ class PeController extends Controller
                 'dbd',
                 'dss',
                 'kesimpulan',
-                'fogging'
+                'fogging',
+                'latlong'
             )
                 ->join('kasus', 'pe.idk', '=', 'kasus.idk')
-                ->join('pasien', 'pasien.id', '=', 'kasus.idp')
+                ->join('pasien', 'pasien.id', '=', 'kasus.idp', 'right')
                 ->where('pe.idk', $id)->first();
             if (empty($pe)) {
                 $this->code = 404;
@@ -72,6 +73,9 @@ class PeController extends Controller
                 $this->status = true;
                 $this->code = 200;
                 $this->message = 'ok';
+                $latlong = explode(',', $pe->latlong);
+                $pe->latitude = (string)(float)$latlong[0];
+                $pe->longitude = (string)(float)$latlong[1];
                 $this->data = $pe;
             }
         }
@@ -168,7 +172,7 @@ class PeController extends Controller
             $this->code = 401;
         } else {
             $rules = [
-                'id_kasus'       => 'required|unique:pe,idk',
+                'id_kasus'       => 'required',
                 'latitude'       => 'required',
                 'longitude'      => 'required',
             ];
