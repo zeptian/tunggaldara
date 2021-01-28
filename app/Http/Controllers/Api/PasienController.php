@@ -59,7 +59,7 @@ class PasienController extends Controller
                 $kels[] = $v->kode;
             }
 
-            $pasien = Pasien::select('kasus.idk', 'nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'tgl_lp', 'rs', 'status', 'tgl_pe', 'diag_akhir as jenis', 'tgl_verifikasi')
+            $pasien = Pasien::select('kasus.idk', 'nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'tgl_lp', 'rs', 'status', 'tgl_pe', 'diag_akhir as jenis', 'kasus.tgl_verifikasi')
                 ->join('kasus', 'kasus.idp', '=', 'pasien.id')
                 ->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')
                 ->where('tgl_pe', null)
@@ -92,7 +92,7 @@ class PasienController extends Controller
                 $kels[] = $v->kode;
             }
 
-            $pasien = Pasien::select('kasus.idk', 'nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'tgl_lp', 'rs', 'status', 'tgl_pe', 'diag_akhir as jenis', 'tgl_verifikasi')
+            $pasien = Pasien::select('kasus.idk', 'nama', 'ortu', 'alamat', 'rtrw', 'kdesa', 'alamat_ktp', 'jkl', 'tgl_lahir', 'no_kontak', 'tgl_lp', 'rs', 'status', 'tgl_pe', 'diag_akhir as jenis', 'kasus.tgl_verifikasi')
                 ->join('kasus', 'kasus.idp', '=', 'pasien.id')
                 ->join('pe', 'pe.idk', '=', 'kasus.idk', 'left outer')
                 ->where('tgl_pe', '!=', null)
