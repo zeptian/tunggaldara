@@ -12,6 +12,6 @@ class Kasus extends Model
 
     public function Pasien()
     {
-        $this->belongsTo(Pasien::class);
+        return $this->hasOne(Pasien::class);
     }
 }

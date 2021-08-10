@@ -12,6 +12,6 @@ class Pasien extends Model
     public $timestamps = false;
     public function Kasus()
     {
-        $this->hasOne(Kasus::class);
+        return $this->hasOne(Kasus::class);
     }
 }

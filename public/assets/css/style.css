@@ -1,0 +1,94 @@
+html,
+body {
+    height: 100%;
+}
+.rd-20 {
+    border-radius: 20px;
+}
+#main-wraper {
+    margin: 5%;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 100%;
+    background-color: #f4f6f9;
+}
+#main-wraper::before {
+    content: " ";
+    font-size: 12px;
+    justify-content: center;
+    padding: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    background-color: #c44569;
+    position: absolute;
+    width: 60px;
+    min-height: 100%;
+}
+#left {
+    padding-left: 52px;
+    min-height: 100%;
+}
+#user {
+    min-height: 100%;
+}
+#right {
+    padding: 20px;
+}
+.navbar-light {
+    background-color: #f4f6f9;
+}
+
+a {
+    color: #212529;
+}
+.breadcrumb {
+    background-color: #f4f6f9;
+    border-bottom: #c44569 solid;
+}
+.card-header {
+    padding: 0.5rem 1.75rem;
+}
+.info-box-sm {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 30px;
+    padding: 0.5rem;
+    position: relative;
+    width: 100%;
+}
+.info-box .info-box-icon-sm {
+    border-radius: 0.25rem;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 0.5rem;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    width: 70px;
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 400;
+}
+.form-group {
+    margin-bottom: 0.5rem;
+}
+.form-control {
+    padding: 0.2rem;
+    height: auto;
+    font-size: 15px;
+}
+
+.of-scroll {
+    overflow: scroll;
+}
+.of-hide {
+    overflow: hidden;
+}

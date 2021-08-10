@@ -1,3 +1,4 @@
+@extends('home')
 @section('content')
 <div class="card">
     <div class="card-body login-card-body">

@@ -17,6 +17,7 @@ class WebSocketController extends Controller implements MessageComponentInterfac
     function onOpen(ConnectionInterface $conn)
     {
         $this->connections[$conn->resourceId] = compact('conn') + ['user_id' => null];
+        echo "New Connection: ({$conn->resourceId})\n";
     }
 
     /**
@@ -26,14 +27,15 @@ class WebSocketController extends Controller implements MessageComponentInterfac
      */
     function onClose(ConnectionInterface $conn)
     {
-        $disconnectedId = $conn->resourceId;
-        unset($this->connections[$disconnectedId]);
-        foreach ($this->connections as &$connection)
-            $connection['conn']->send(json_encode([
-                'offline_user' => $disconnectedId,
-                'from_user_id' => 'server control',
-                'from_resource_id' => null
-            ]));
+        echo "Close Connection: ({$conn->resourceId})\n";
+        // $disconnectedId = $conn->resourceId;
+        // unset($this->connections[$disconnectedId]);
+        // foreach ($this->connections as &$connection)
+        //     $connection['conn']->send(json_encode([
+        //         'offline_user' => $disconnectedId,
+        //         'from_user_id' => 'server control',
+        //         'from_resource_id' => null
+        //     ]));
     }
 
     /**
@@ -67,15 +69,33 @@ class WebSocketController extends Controller implements MessageComponentInterfac
                 if ($conn->resourceId != $resourceId)
                     $onlineUsers[$resourceId] = $connection['user_id'];
             }
-            $conn->send(json_encode(['online_users' => $onlineUsers]));
+            echo json_encode(['online_users' => $onlineUsers]) . "\n";
         } else {
-            $fromUserId = $this->connections[$conn->resourceId]['user_id'];
-            $msg = json_decode($msg, true);
-            $this->connections[$msg['to']]['conn']->send(json_encode([
-                'msg' => $msg['content'],
-                'from_user_id' => $fromUserId,
-                'from_resource_id' => $conn->resourceId
-            ]));
+            $fromUserId = $this->connections[$conn->resourceId];
+            // $msg = json_decode($msg, true);
+            // $kirim = [
+            //     'msg' => $msg['content'],
+            //     'from_user_id' => $fromUserId,
+            //     'from_resource_id' => $conn->resourceId
+            // ];
+            // $this->connections[$msg['to']]['conn']->send(json_encode($kirim));
+            // echo json_encode(['message' => $kirim]) . "\n";
+
+            foreach ($this->connections as $resourceId => $connection) {
+                $onlineUsers = $connection;
+                $psn = json_decode($msg, true);
+                if ($onlineUsers['user_id'] == $psn['user_id']) {
+                    //kirim ke penerima
+                    $kirim = [
+                        'message' => $psn['content'],
+                        'from_user_id' => $fromUserId,
+                        'from_resource_id' => $conn->resourceId
+                    ];
+                    $this->connections[$resourceId]['conn']->send(json_encode($kirim));
+                    //$this->connections[$msg['to']]['conn']->send(json_encode($kirim));
+                    echo json_encode(['message' => $kirim]) . "\n";
+                }
+            }
         }
     }
 }

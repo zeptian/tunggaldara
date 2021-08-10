@@ -73,3 +73,16 @@
     background-color: #a6816a;
     color: #fff;
 }
+
+.bg-info {
+    background-color: #68b2f3 !important;
+}
+.bg-danger {
+    background-color: #ce6482 !important;
+}
+.bg-warning {
+    background-color: #f9c62b !important;
+}
+.bg-success {
+    background-color: #8cc540 !important;
+}

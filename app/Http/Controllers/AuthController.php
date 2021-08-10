@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['login']]);
-    }
+
     public function login()
     {
         return view('login');
     }
-    public function do_login(Request $request)
+    public function doLogin(Request $request)
     {
         $user = $request->input('username');
         $pass = $request->input('password');

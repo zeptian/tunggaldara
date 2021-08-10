@@ -1,100 +1,21 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('home')
 
-        <title>Laravel</title>
+@section('content')
+    <h3>Tunggal Dara</h3>
+    <hr/>
+    <div class="row">
+        <div class="card">
+            <div class="card-body">                
+                <p> Demam Berdarah Dengue (DBD) merupakan penyakit infeksi yang disebabkan oleh virus Dengue yang ditularkan melalui gigitan nyamuk Aedes dan dapat menyebabkan kematian. DBD masih menjadi salah satu permasalahan kesehatan yang dihadapi oleh Kota Semarang. Tingginya kasus DBD dari tahun ke tahun menjadi permasalahan yang harus diselesaikan. Kota Semarang sering menduduki peringkat atas untuk angka kejadian DBD, baik tingkat nasional maupun Jawa Tengah. Dari tahun ke tahun Dinkes Kota Semarang mengidentifikasi semakin banyaknya wilayah kelurahan endemik DBD. </p>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <p>Upaya pengendalian DBD tidak lepas dari peran serta seluruh sektor yang ada di Kota Semarang. Peran serta seluruh sektor yang ada di Kota Semarang perlu dilakukan secara sinergi. Baik sektor pemerintah, swasta, dan masyarakat itu. Sebagai upaya untuk mendukung sinergitas seluruh sektor ini, maka dibuatlah sistem integrasi yang memungkinkan seluruh sektor dapat melaporkan dan menerima informasi yang berkaitan dengan DBD. Sistem integrasi ini dinamakan TUNGGAL DARA (Bersatu Tanggulangi Demam Berdarah). Melalui TUNGGAL DARA diharapkan sinergitas seluruh sektor meningkat sehingga dapat menekan angka kejadian DBD di Kota Semarang. </p>
+                    
+                <p>TUNGGAL DARA merupakan sistem integrasi yang bertujuan menjembatani hambatan yang muncul dalam upaya pengendalian kejadian DBD. Pelaporan pasien dilakukan secara online dan realtime. Pemberitahuan kepada petugas dan pemangku wilayah melalui sistem sms gateway, sehingga petugas dan pemangku wilayah cepat menggerakkan masyarakat untuk melakukan antisipasi penyebaran dengan melakukan PSN 3M secara mandiri. Masyarakat dan kader pun dengan mudah melaporkan hasil kegiatan PSN 3M nya melalui format sms kepada server, sehingga tidak harus bersusah payah mengirimkan ke Puskesmas. </p>
+                    
+                <p>TUNGGAL DARA memodifikasi kerjasama linsek dengan bantuan sistem informasi. Sehingga memberikan kemudahan dalam mendapatkan informasi dan analisa, dapat diakses kapan dan dimana saja. Cepatnya informasi memungkinkan pengambil kebijakan juga cepat memutuskan cara penanggulangan. Sehingga kasus DBD dapat ditekan penyebarannya. </p>
+                
+                <h2><a href="{{route('menu')}}">MENU</a></h2>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
