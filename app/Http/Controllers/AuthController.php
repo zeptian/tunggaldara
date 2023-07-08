@@ -25,10 +25,6 @@ class AuthController extends Controller
             $this->message = 'ok';
             $this->data = ['lokasi' => $au->lokasi, 'kode' => $au->kpusk, 'nama' => $au->nama, 'level' => $au->level, 'access_token' => $token, 'token_type' => 'bearer', 'expires_in' => 3600];
         }
-        return response()->json([
-            'status'    => $this->status,
-            'message'   => $this->message,
-            'data'      => $this->data,
-        ]);
+        return redirect(route('menu'))->with('message', 'login berhasil');
     }
 }

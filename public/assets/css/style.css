@@ -10,7 +10,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     min-height: 100%;
-    background-color: #f4f6f9;
+    background-color: #f4f6f980;
 }
 #main-wraper::before {
     content: " ";

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand navbar-light">
+<div class="navbar navbar-expand">
     <!-- Left navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item d-none d-sm-inline-block">

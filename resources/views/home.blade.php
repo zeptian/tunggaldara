@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Boxed Layout</title>
+  <title>Tunggal Dara</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('assets/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/color.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  @yield('css')
 </head>
 <body class="blue">
   <div class="content-wraper card" id="main-wraper">
@@ -46,8 +47,7 @@
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('assets/js/demo.js')}}"></script>
+@yield('js')
 </body>
 </html>
 

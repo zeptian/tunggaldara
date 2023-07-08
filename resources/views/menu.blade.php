@@ -1,6 +1,7 @@
 @extends('home')
 
 @section('content')
+<div style="background-color: #ffffff80; padding:20px;">
     <h3>Kasus</h3>
     <hr/>
     <div class="row">
@@ -95,4 +96,5 @@
         </div>
         <!-- /.col -->
     </div>
+  </div>
 @endsection

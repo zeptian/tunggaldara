@@ -1,6 +1,7 @@
 @extends('home')
 @section('content')
-<div class="card">
+<div style="min-height:500px">
+<div class="card col-md-6" style="margin:auto;">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login untuk memulai</p>
       <form action="{{ route('login') }}" method="post">
@@ -50,4 +51,10 @@
     </div>
     <!-- /.login-card-body -->
   </div>
+</div>
+@endsection
+@section('css')
+<style>
+  
+</style>
 @endsection
