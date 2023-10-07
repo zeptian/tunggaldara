@@ -141,7 +141,7 @@ class PeController extends Controller
                 $pe->dbd            = $request->dbd;
                 $pe->dss            = $request->dss;
                 $pe->kesimpulan     = $request->kesimpulan;
-                $pe->fogging     = $request->fogging;
+                $pe->fogging        = $request->fogging;
                 $pe->user           = $user->kpusk;
 
                 $idp = Kasus::select('idp')->where('idk', $request->id_kasus)->first();

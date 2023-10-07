@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -20,11 +21,15 @@ class AuthController extends Controller
         $au = User::where([['login', $user], ['pass', $pass]])->first();
         // dd($au);
         if ($au) {
-            $token = auth('api')->login($au);
-            $this->status = true;
-            $this->message = 'ok';
-            $this->data = ['lokasi' => $au->lokasi, 'kode' => $au->kpusk, 'nama' => $au->nama, 'level' => $au->level, 'access_token' => $token, 'token_type' => 'bearer', 'expires_in' => 3600];
+            Auth::login($au);
+            return redirect(route('menu'))->with('message', 'login berhasil');
         }
-        return redirect(route('menu'))->with('message', 'login berhasil');
+        return redirect(route('login'));
+    }
+
+    function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect(route('login'));
     }
 }
