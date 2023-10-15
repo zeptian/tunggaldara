@@ -176,4 +176,11 @@ class KasusController extends Controller
 
         return redirect()->route('kasus');
     }
+
+    public function verif($idp)
+    {
+        $pasien = Pasien::find($idp);
+        $kasus = Kasus::where('idp', (int)$idp)->first();
+        return view('kasus.verif_modal', ['pasien' => $pasien, 'kasus' => $kasus]);
+    }
 }

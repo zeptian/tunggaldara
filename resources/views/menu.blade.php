@@ -41,7 +41,7 @@
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-location"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">
-                            <a href="{{ route('kasus') }}" class="stretched-link">
+                            <a href="{{ route('pe') }}" class="stretched-link">
                                 <h5>PENYELIDIKAN EPIDEMIOLOGI</h5>
                             </a>
                         </span>
@@ -61,7 +61,7 @@
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-location"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">
-                            <a href="{{ route('kasus') }}" class="stretched-link">
+                            <a href="{{ route('pjn') }}" class="stretched-link">
                                 <h5>LAPORAN PJN & PTP</h5>
                             </a>
                         </span>
@@ -76,7 +76,7 @@
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-location"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">
-                            <a href="{{ route('kasus') }}" class="stretched-link">
+                            <a href="{{ route('sicentik') }}" class="stretched-link">
                                 <h5>SICENTIK</h5>
                             </a>
                         </span>
@@ -91,7 +91,7 @@
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-location"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">
-                            <a href="{{ route('kasus') }}" class="stretched-link">
+                            <a href="{{ route('srsj') }}" class="stretched-link">
                                 <h5>SATU RUMAH SATU JUMANTIK</h5>
                             </a>
                         </span>
