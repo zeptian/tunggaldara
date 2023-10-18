@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function ($route) {
 
     Route::get('/kasus/rekap_angka', 'RekapKasusController@rekapKasus')->name('kasus.rekapAngka');
     Route::get('/kasus/rekap_rs', 'RekapKasusController@rekapRs')->name('kasus.rekapRs');
-
+    Route::get('/kasus/rekap_kecepatan_lapor', 'RekapKasusController@kecepatanLapor')->name('kasus.rekapKecepatan');
 
     Route::get('/kasus', 'KasusController@index')->name('kasus');
     Route::get('/kasus/tambah', 'KasusController@create')->name('kasus.create');
@@ -59,13 +59,13 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::put('/pjn/{id}/edit', 'PjnController@update')->name('pjn.update');
     Route::delete('/pjn/{id}', 'PjnController@destroy')->name('pjn.destroy');
 
-    Route::get('/monev_pjn', 'LapPjnController@index')->name('monev_pjn');
-    Route::get('/monev_pjn/rekap', 'LapPjnController@index')->name('monev_pjn.rekap');
-    Route::get('/monev_pjn/tambah', 'LapPjnController@create')->name('monev_pjn.create');
-    Route::post('/monev_pjn/tambah', 'LapPjnController@store')->name('monev_pjn.store');
-    Route::get('/monev_pjn/{id}/edit', 'LapPjnController@edit')->name('monev_pjn.edit');
-    Route::put('/monev_pjn/{id}/edit', 'LapPjnController@update')->name('monev_pjn.update');
-    Route::delete('/monev_pjn/{id}', 'LapPjnController@destroy')->name('monev_pjn.destroy');
+    Route::get('/monev_pjn', 'MonevPjnController@index')->name('monev_pjn');
+    Route::get('/monev_pjn/rekap', 'MonevPjnController@index')->name('monev_pjn.rekap');
+    Route::get('/monev_pjn/tambah', 'MonevPjnController@create')->name('monev_pjn.create');
+    Route::post('/monev_pjn/tambah', 'MonevPjnController@store')->name('monev_pjn.store');
+    Route::get('/monev_pjn/{id}/edit', 'MonevPjnController@edit')->name('monev_pjn.edit');
+    Route::put('/monev_pjn/{id}/edit', 'MonevPjnController@update')->name('monev_pjn.update');
+    Route::delete('/monev_pjn/{id}', 'MonevPjnController@destroy')->name('monev_pjn.destroy');
 
     Route::get('/srsj', 'SrsjController@index')->name('srsj');
     Route::get('/srsj/rekap', 'SrsjController@index')->name('srsj.rekap');

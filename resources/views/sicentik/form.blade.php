@@ -28,7 +28,11 @@
                         readonly />
                 </div>
             </div>
-
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+            @endif
             <div class="form-group row">
                 <label class="col-4 col-md-2">Tahun</label>
                 <div class="col-8 col-md-4">
@@ -124,17 +128,6 @@
     </div>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 @endsection
 @section('js')
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $(".datatable").dataTable();
-
-        })
-    </script>
 @endsection

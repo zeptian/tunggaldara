@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
     @yield('css')
 </head>
 
 <body class="blue">
-    <div class="content-wraper card" id="main-wraper">
+    <div class="content-wraper card elevation-2" id="main-wraper">
         <div class="row">
             <div class="col-md-3 col-lg-2" id="left">
                 @if (Auth::check())
@@ -29,7 +30,7 @@
                 @endif
 
             </div>
-            <div class="col-md-9 col-lg-10 mt-0 mb-0" id="right">
+            <div class="col-md-9 col-lg-10 py-0" id="right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">HOME</a></li>
@@ -50,6 +51,26 @@
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
+
+        <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                iconColor: 'white',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true
+            })
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    Toast.fire({
+                        icon: 'error',
+                        title: '{{ $error }}'
+                    })
+                @endforeach
+            @endif
+        </script>
         @yield('js')
 </body>
 

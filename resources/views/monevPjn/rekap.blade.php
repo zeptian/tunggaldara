@@ -1,11 +1,11 @@
 @extends('home')
 
 @section('content')
-    <h3>Lapran SiCentik</h3>
+    <h3>Laporan Monev PJN</h3>
     <hr />
     <div class="card">
         <div class="card-header">
-            <h4>Rekap Laporan SiCentik</h4>
+            <h4>Rekap Laporan Monev PJN</h4>
         </div>
         <div class="card-body of-scroll">
             <form>
@@ -45,37 +45,58 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Tahun</th>
-                        <th>Bulan</th>
                         <th>Puskesmas</th>
-                        <th>Jumlah sekolah sasaran SiCentik</th>
-                        <th>Jumlah sekolah yang melakukan Sicentik</th>
-                        <th>Jumlah Sekolah yang dipantau jentik oleh Puskesmas</th>
-                        <th>Jumlah Sekolah yang Positif jentik</th>
-                        <th>Jumlah Sekolah yang termonev oleh Puskesmas</th>
-                        <th>Lampiran</th>
+                        <th>Tanggal Kegiatan</th>
+                        <th>Kelurahan</th>
+                        <th>RW</th>
+                        <th>Jml bangunan dipantau jentik</th>
+                        <th>Jml bangunan positif jentik</th>
+                        <th>ABJ</th>
+                        <th>Jml kontainer diperiksa (dalam bangunan)</th>
+                        <th>jml kontainer positif (dalam bangunan)</th>
+                        <th>Jml kontainer diperiksa (luar bangunan)</th>
+                        <th>jml kontainer positif (luar bangunan)</th>
+                        <th>Jml bangunan pasang perangkap</th>
+                        <th>Jml tikus tertangkap</th>
+                        <th>Jml larvasida (gr)</th>
+                        <th>Apel sebelum kegiatan</th>
+                        <th>Pimpinan PSN Serentak</th>
+                        <th>Evaluasi setelah kegiatan</th>
+                        <th>Jabatan Pimpinan Apel</th>
+                        <th>Sirine</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($sicentik as $item)
+                    @foreach ($monevPjn as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->tahun }}</td>
-                            <td>{{ $item->bulan }}</td>
                             <td>{{ $item->puskesmas }}</td>
-                            <td>{{ $item->sasaranSekolah }}</td>
-                            <td>{{ $item->realSekolah }}</td>
-                            <td>{{ $item->sekolahPantau }}</td>
-                            <td>{{ $item->sekolahPositif }}</td>
-                            <td>{{ $item->sekolahMonev }}</td>
-                            <td>{{ $item->Lampiran }}</td>
+                            <td>{{ $item->tgl_kegiatan }}</td>
+                            <td>{{ $item->kelurahan }}</td>
+                            <td>{{ $item->rw }}</td>
+                            <td>{{ $item->bangunan_pantau }}</td>
+                            <td>{{ $item->bangunan_positif }}</td>
+                            <td>{{ $item->bangunan_pantau > 0 ? round((($item->bangunan_pantau - $item->bangunan_positif) / $item->bangunan_pantau) * 100, 2) : '-' }}
+                            </td>
+                            <td>{{ $item->kontainer_dalam_periksa }}</td>
+                            <td>{{ $item->kontainer_dalam_positif }}</td>
+                            <td>{{ $item->kontainer_luar_periksa }}</td>
+                            <td>{{ $item->kontainer_luar_positif }}</td>
+                            <td>{{ $item->perangkap_tikus }}</td>
+                            <td>{{ $item->tikus_ditangkap }}</td>
+                            <td>{{ $item->larvasida }}</td>
+                            <td>{{ $item->apel }}</td>
+                            <td>{{ $item->pimpinan_pjn }}</td>
+                            <td>{{ $item->jabatan }}</td>
+                            <td>{{ $item->evaluasi }}</td>
+                            <td>{{ $item->sirine }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('sicentik.edit', ['id' => $item->id_sicentik]) }}"
+                                    <a href="{{ route('monev_pjn.edit', ['id' => $item->id]) }}"
                                         class="btn btn-sm btn-warning">edit</a>
                                     <a href="#" class="btn btn-sm btn-danger"
-                                        onclick="hapus('{{ $item->id_sicentik }}','{{ $item->puskesmas }}','{{ $item->bulan }}')">hapus</a>
+                                        onclick="hapus('{{ $item->id }}','{{ $item->tgl_kegiatan }}','{{ $item->kelurahan }}')">hapus</a>
                                 </div>
                             </td>
                         </tr>
@@ -94,13 +115,11 @@
     <script>
         $(document).ready(function() {
             $(".datatable").dataTable();
-
         })
 
-        function hapus(id, puskesmas, bulan) {
+        function hapus(id, tgl, kel) {
             Swal.fire({
-                title: 'Apakah anda ingin menghapus data Sicentik Pusk ' + puskesmas + " bulan " +
-                    bulan + '?',
+                title: 'Apakah anda ingin menghapus Monev PJN pada ' + kel + " tanggal " + tgl + '?',
                 icon: 'warning',
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -110,7 +129,7 @@
                 denyButtonText: `Tidak`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.post("{{ URL::to('/sicentik') }}/" + id, {
+                    $.post("{{ URL::to('/monev_pjn') }}/" + id, {
                             _token: '{{ csrf_token() }}',
                             _method: 'delete'
                         },
