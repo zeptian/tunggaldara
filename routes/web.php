@@ -100,4 +100,7 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::delete('/srsj/{id}', 'SrsjController@destroy')->name('srsj.destroy');
 });
 
+
+Route::get('/graph/kasus_bulanan', 'GraphController@kasusBulanan')->name("graph.kasusBulanan");
+
 Route::get('test', 'TestWsController@test');
