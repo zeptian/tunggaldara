@@ -399,18 +399,41 @@
             </div>
 
             <div class="form-group row">
-                <label for="trombosit" class="col-md-2">Trombosit</label>
+                <label for="trombosit_awal" class="col-md-2">Trombosit Awal</label>
                 <div class="col-md-4">
-                    <input type="text" name="trombosit" id="trombosit"
-                        class="form-control {{ $errors->has('trombosit') ? 'is-invalid' : '' }}"
-                        value="{{ $kasus->trombosit ?? old('trombosit') }}">
-                    @if ($errors->has('trombosit'))
+                    <input type="text" name="trombosit_awal" id="trombosit_awal"
+                        class="form-control {{ $errors->has('trombosit_awal') ? 'is-invalid' : '' }}"
+                        value="{{ $kasus->trombosit_awal ?? old('trombosit_awal') }}">
+                    @if ($errors->has('trombosit_awal'))
                         <div class="invalid-feedback">
-                            <strong>{{ $errors->first('trombosit') }}</strong>
+                            <strong>{{ $errors->first('trombosit_awal') }}</strong>
                         </div>
                     @endif
                 </div>
-
+                <label for="trombosit_tegak" class="col-md-2">Trombosit Tegak</label>
+                <div class="col-md-4">
+                    <input type="text" name="trombosit_tegak" id="trombosit_tegak"
+                        class="form-control {{ $errors->has('trombosit_tegak') ? 'is-invalid' : '' }}"
+                        value="{{ $kasus->trombosit_tegak ?? old('trombosit_tegak') }}">
+                    @if ($errors->has('trombosit_tegak'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('trombosit_tegak') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="hb_awal" class="col-md-2">HB Awal</label>
+                <div class="col-md-4">
+                    <input type="text" name="hb_awal" id="hb_awal"
+                        class="form-control {{ $errors->has('hb_awal') ? 'is-invalid' : '' }}"
+                        value="{{ $kasus->hb_awal ?? old('hb_awal') }}">
+                    @if ($errors->has('hb_awal'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('hb_awal') }}</strong>
+                        </div>
+                    @endif
+                </div>
                 <label for="hb_tegak" class="col-md-2">HB Tegak</label>
                 <div class="col-md-4">
                     <input type="text" name="hb_tegak" id="hb_tegak"

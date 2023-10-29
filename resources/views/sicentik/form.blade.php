@@ -28,11 +28,6 @@
                         readonly />
                 </div>
             </div>
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    {{ $error }}
-                @endforeach
-            @endif
             <div class="form-group row">
                 <label class="col-4 col-md-2">Tahun</label>
                 <div class="col-8 col-md-4">

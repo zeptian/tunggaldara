@@ -33,3 +33,9 @@ CHANGE `ns1` `ns1` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `igm`,
 CHANGE `pemeriksa` `pemeriksa` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `ns1`,
 CHANGE `diag_akhir` `diag_akhir` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `pemeriksa`,
 CHANGE `updated_at` `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP AFTER `created_at`;
+
+ALTER TABLE `kasus`
+CHANGE `trombosit` `trombosit_awal` int(11) NULL AFTER `gejala`,
+ADD `trombosit_tegak` int(11) NULL AFTER `trombosit_awal`,
+ADD `hb_awal` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `ht_tegak`,
+CHANGE `updated_at` `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP AFTER `created_at`;

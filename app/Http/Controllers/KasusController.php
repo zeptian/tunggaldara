@@ -6,6 +6,7 @@ use App\Kasus;
 use App\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class KasusController extends Controller
 {
@@ -90,9 +91,11 @@ class KasusController extends Controller
         $kasus->panas = $request->panas;
         $kasus->uji_rl = $request->uji_rl;
         $kasus->gejala = implode(",", $request->gejala);
-        $kasus->trombosit = $request->trombosit;
+        $kasus->trombosit_awal = $request->trombosit_awal;
+        $kasus->trombosit_tegak = $request->trombosit_tegak;
         $kasus->ht_awal = $request->ht_awal;
         $kasus->ht_tegak = $request->ht_tegak;
+        $kasus->hb_awal = $request->hb_awal;
         $kasus->hb_tegak = $request->hb_tegak;
         $kasus->igg = $request->igg;
         $kasus->igm = $request->igm;
@@ -164,9 +167,10 @@ class KasusController extends Controller
         $kasus->panas = $request->panas;
         $kasus->uji_rl = $request->uji_rl;
         $kasus->gejala = implode(",", $request->gejala);
-        $kasus->trombosit = $request->trombosit;
+        $kasus->trombosit_awal = $request->trombosit_awal;
         $kasus->ht_awal = $request->ht_awal;
         $kasus->ht_tegak = $request->ht_tegak;
+        $kasus->hb_awal = $request->hb_awal;
         $kasus->hb_tegak = $request->hb_tegak;
         $kasus->igg = $request->igg;
         $kasus->igm = $request->igm;
@@ -182,5 +186,48 @@ class KasusController extends Controller
         $pasien = Pasien::find($idp);
         $kasus = Kasus::where('idp', (int)$idp)->first();
         return view('kasus.verif_modal', ['pasien' => $pasien, 'kasus' => $kasus]);
+    }
+    public function verifSave($idp, Request $request)
+    {
+        $rules = [
+            'trombosit_awal' => 'required',
+            'trombosit_tegak' => 'required',
+            'hb_awal' => 'required',
+            'hb_tegak' => 'required',
+            'ht_awal' => 'required',
+            'ht_tegak' => 'required',
+            'igg' => 'required',
+            'igm' => 'required',
+            'ns1' => 'required',
+            'diag_akhir' => 'required',
+        ];
+        $validatedData = Validator::make($request->all(), $rules);
+        if ($validatedData->fails()) {
+            $message = "";
+            foreach ($validatedData->errors()->toArray() as $error) {
+                foreach ($error as $sub_error) {
+                    $message .= $sub_error . " <br/>";
+                }
+            }
+            return response()->json(["status" => false, "message" => $message]);
+        }
+        $kasus = Kasus::where('idp', (int)$idp)->first();
+        $kasus->trombosit_awal  = $request->trombosit_awal;
+        $kasus->trombosit_tegak = $request->trombosit_tegak;
+        $kasus->hb_awal         = $request->hb_awal;
+        $kasus->hb_tegak        = $request->hb_tegak;
+        $kasus->ht_awal         = $request->ht_awal;
+        $kasus->ht_tegak        = $request->ht_tegak;
+        $kasus->igg             = $request->igg;
+        $kasus->igm             = $request->igm;
+        $kasus->ns1             = $request->ns1;
+        $kasus->diag_akhir      = $request->diag_akhir;
+        $kasus->tgl_verifikasi  = date("Y-m-d");
+
+        if ($kasus->save()) {
+            return response()->json(["status" => true, "message" => "Data berhasil disimpan"]);
+        } else {
+            return response()->json(["status" => false, "message" => "Data gagal disimpan"]);
+        }
     }
 }

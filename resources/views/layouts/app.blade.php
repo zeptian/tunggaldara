@@ -53,6 +53,7 @@
         <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
 
         <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script src="{{ asset('js/exportexcel.js') }}"></script>
         <script>
             const Toast = Swal.mixin({
                 toast: true,

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Kelurahan;
-use App\Pjn;
+use App\Pjb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PjnController extends Controller
+class PjbController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,34 +19,29 @@ class PjnController extends Controller
         $user = Auth::user();
         if ($user->kode == "dkk") {
             $desa = Kelurahan::get();
-            $pjn = Pjn::where('tahun', $request->tahun);
+            $pjb = Pjb::where('tahun', $request->tahun);
             if ($request->bulan != "all") {
-                $pjn = $pjn->where('bulan', $request->bulan);
-            }
-            if ($request->minggu_ke != "") {
-                $pjn = $pjn->where("minggu_ke", $request->minggu_ke);
+                $pjb = $pjb->where('bulan', $request->bulan);
             }
             if ($request->kdesa != "") {
-                $pjn = $pjn->where("kdesa", $request->kdesa);
+                $pjb = $pjb->where("kdesa", $request->kdesa);
             }
         } else {
             $desa = Kelurahan::where("kode_p", $user->kode)->get();
-            $pjn = Pjn::where('tahun', $request->tahun);
+            $pjb = Pjb::where('tahun', $request->tahun);
             if ($request->bulan != "all") {
-                $pjn = $pjn->where('bulan', $request->bulan);
-            }
-            if ($request->minggu_ke != "") {
-                $pjn = $pjn->where("minggu_ke", $request->minggu_ke);
+                $pjb = $pjb->where('bulan', $request->bulan);
             }
             if ($request->kdesa != "") {
-                $pjn = $pjn->where("kdesa", $request->kdesa);
+                $pjb = $pjb->where("kdesa", $request->kdesa);
             } else {
                 $desaIn = Kelurahan::where("kode_p", $user->kode)->pluck('kode')->toArray();
-                $pjn = $pjn->whereIn("kdesa", $desaIn);
+                $pjb = $pjb->whereIn("kdesa", $desaIn);
+                // dd($pjb->toSql());
             }
         }
-        $pjn = $pjn->get();
-        return view('pjn.rekap', ['pjn' => $pjn, 'desa' => $desa, 'request' => $request]);
+        $pjb = $pjb->get();
+        return view('pjb.rekap', ['pjb' => $pjb, 'desa' => $desa, 'request' => $request]);
     }
 
     /**
@@ -63,7 +58,7 @@ class PjnController extends Controller
         } else {
             $desa = Kelurahan::where("kode_p", $user->kode)->get();
         }
-        return view('pjn.form', ['desa' => $desa]);
+        return view('pjb.form', ['desa' => $desa]);
     }
 
     /**
@@ -78,26 +73,20 @@ class PjnController extends Controller
         $request->validate([
             'tahun'             => 'required',
             'bulan'             => 'required',
-            'minggu_ke'         => 'required|min:0|max:5',
             'kdesa'             => 'required',
-            'rt'                => 'required',
-            'rw'                => 'required',
             'jml_rumah'         => 'required|min:0',
             'jml_positif'       => 'required|min:0',
         ]);
         $user = Auth::user();
-        $pjn = new Pjn();
-        $pjn->tahun         = $request->tahun;
-        $pjn->bulan         = $request->bulan;
-        $pjn->minggu_ke     = $request->minggu_ke;
-        $pjn->kdesa         = $request->kdesa;
-        $pjn->rt            = $request->rt;
-        $pjn->rw            = $request->rw;
-        $pjn->jml_rumah     = $request->jml_rumah;
-        $pjn->jml_positif   = $request->jml_positif;
-        $pjn->save();
+        $pjb = new Pjb();
+        $pjb->tahun         = $request->tahun;
+        $pjb->bulan         = $request->bulan;
+        $pjb->kdesa         = $request->kdesa;
+        $pjb->jml_rumah     = $request->jml_rumah;
+        $pjb->jml_positif   = $request->jml_positif;
+        $pjb->save();
 
-        return redirect()->route('pjn');
+        return redirect()->route('pjb');
     }
 
     /**
@@ -120,7 +109,7 @@ class PjnController extends Controller
     public function edit($id)
     {
         //
-        $pjn = Pjn::find($id);
+        $pjb = Pjb::find($id);
         $user = Auth::user();
         if ($user->kode == "dkk") {
             $desa = Kelurahan::get();
@@ -128,7 +117,7 @@ class PjnController extends Controller
             $desa = Kelurahan::where("kode_p", $user->kode)->get();
         }
 
-        return view('pjn.form', ['desa' => $desa, 'pjn' => $pjn]);
+        return view('pjb.form', ['desa' => $desa, 'pjb' => $pjb]);
     }
 
     /**
@@ -144,26 +133,20 @@ class PjnController extends Controller
         $request->validate([
             'tahun'             => 'required',
             'bulan'             => 'required',
-            'minggu_ke'         => 'required|min:0|max:5',
             'kdesa'             => 'required',
-            'rt'                => 'required',
-            'rw'                => 'required',
             'jml_rumah'         => 'required|min:0',
             'jml_positif'       => 'required|min:0',
         ]);
         $user = Auth::user();
-        $pjn = Pjn::find($id);
-        $pjn->tahun         = $request->tahun;
-        $pjn->bulan         = $request->bulan;
-        $pjn->minggu_ke     = $request->minggu_ke;
-        $pjn->kdesa         = $request->kdesa;
-        $pjn->rt            = $request->rt;
-        $pjn->rw            = $request->rw;
-        $pjn->jml_rumah     = $request->jml_rumah;
-        $pjn->jml_positif   = $request->jml_positif;
-        $pjn->save();
+        $pjb = Pjb::find($id);
+        $pjb->tahun         = $request->tahun;
+        $pjb->bulan         = $request->bulan;
+        $pjb->kdesa         = $request->kdesa;
+        $pjb->jml_rumah     = $request->jml_rumah;
+        $pjb->jml_positif   = $request->jml_positif;
+        $pjb->save();
 
-        return redirect()->route('pjn');
+        return redirect()->route('pjb');
     }
 
     /**
@@ -175,8 +158,8 @@ class PjnController extends Controller
     public function destroy($id)
     {
         //
-        $pjn = Pjn::find($id);
-        $pjn->delete();
+        $pjb = Pjb::find($id);
+        $pjb->delete();
 
         return response()->json(["status" => true, "message" => "Data berhasil di hapus"]);
     }

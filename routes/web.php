@@ -43,13 +43,21 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::put('/pe/{idk}/edit', 'PeController@update')->name('pe.update');
     Route::delete('/pe/{idk}', 'PeController@destroy')->name('pe.destroy');
 
-    Route::get('/sicentik', 'SicentikController@index')->name('sicentik');
-    Route::get('/sicentik/rekap', 'SicentikController@index')->name('sicentik.rekap');
-    Route::get('/sicentik/tambah', 'SicentikController@create')->name('sicentik.create');
-    Route::post('/sicentik/tambah', 'SicentikController@store')->name('sicentik.store');
-    Route::get('/sicentik/{id}/edit', 'SicentikController@edit')->name('sicentik.edit');
-    Route::put('/sicentik/{id}/edit', 'SicentikController@update')->name('sicentik.update');
-    Route::delete('/sicentik/{id}', 'SicentikController@destroy')->name('sicentik.destroy');
+    Route::get('/pjr', 'PjrController@index')->name('pjr');
+    Route::get('/pjr/rekap', 'PjrController@index')->name('pjr.rekap');
+    Route::get('/pjr/tambah', 'PjrController@create')->name('pjr.create');
+    Route::post('/pjr/tambah', 'PjrController@store')->name('pjr.store');
+    Route::get('/pjr/{id}/edit', 'PjrController@edit')->name('pjr.edit');
+    Route::put('/pjr/{id}/edit', 'PjrController@update')->name('pjr.update');
+    Route::delete('/pjr/{id}', 'PjrController@destroy')->name('pjr.destroy');
+
+    Route::get('/pjb', 'PjbController@index')->name('pjb');
+    Route::get('/pjb/rekap', 'PjbController@index')->name('pjb.rekap');
+    Route::get('/pjb/tambah', 'PjbController@create')->name('pjb.create');
+    Route::post('/pjb/tambah', 'PjbController@store')->name('pjb.store');
+    Route::get('/pjb/{id}/edit', 'PjbController@edit')->name('pjb.edit');
+    Route::put('/pjb/{id}/edit', 'PjbController@update')->name('pjb.update');
+    Route::delete('/pjb/{id}', 'PjbController@destroy')->name('pjb.destroy');
 
     Route::get('/pjn', 'PjnController@index')->name('pjn');
     Route::get('/pjn/rekap', 'PjnController@index')->name('pjn.rekap');
@@ -58,6 +66,22 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::get('/pjn/{id}/edit', 'PjnController@edit')->name('pjn.edit');
     Route::put('/pjn/{id}/edit', 'PjnController@update')->name('pjn.update');
     Route::delete('/pjn/{id}', 'PjnController@destroy')->name('pjn.destroy');
+
+    Route::get('/psn_sekolah', 'PsnSekolahController@index')->name('psn_sekolah');
+    Route::get('/psn_sekolah/rekap', 'PsnSekolahController@index')->name('psn_sekolah.rekap');
+    Route::get('/psn_sekolah/tambah', 'PsnSekolahController@create')->name('psn_sekolah.create');
+    Route::post('/psn_sekolah/tambah', 'PsnSekolahController@store')->name('psn_sekolah.store');
+    Route::get('/psn_sekolah/{id}/edit', 'PsnSekolahController@edit')->name('psn_sekolah.edit');
+    Route::put('/psn_sekolah/{id}/edit', 'PsnSekolahController@update')->name('psn_sekolah.update');
+    Route::delete('/psn_sekolah/{id}', 'PsnSekolahController@destroy')->name('psn_sekolah.destroy');
+
+    Route::get('/sicentik', 'SicentikController@index')->name('sicentik');
+    Route::get('/sicentik/rekap', 'SicentikController@index')->name('sicentik.rekap');
+    Route::get('/sicentik/tambah', 'SicentikController@create')->name('sicentik.create');
+    Route::post('/sicentik/tambah', 'SicentikController@store')->name('sicentik.store');
+    Route::get('/sicentik/{id}/edit', 'SicentikController@edit')->name('sicentik.edit');
+    Route::put('/sicentik/{id}/edit', 'SicentikController@update')->name('sicentik.update');
+    Route::delete('/sicentik/{id}', 'SicentikController@destroy')->name('sicentik.destroy');
 
     Route::get('/monev_pjn', 'MonevPjnController@index')->name('monev_pjn');
     Route::get('/monev_pjn/rekap', 'MonevPjnController@index')->name('monev_pjn.rekap');
