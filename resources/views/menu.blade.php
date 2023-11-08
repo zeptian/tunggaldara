@@ -31,8 +31,17 @@
         </div>
     </div>
     <div class="mb-2" style="background-color: #ffffff80; padding:20px;">
-        <div class="card">
-            <div class="card-body" id="grafikBulanan" style=" height:300px;"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body" id="grafikBulanan" style=" height:300px;"></div>
+                </div>
+            </div>
+            {{-- <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="grafikBulanan2" style=" height:300px;"></div>
+                </div>
+            </div> --}}
         </div>
     </div>
     <div style="background-color: #ffffff80; padding:20px;">
@@ -182,6 +191,12 @@
                     graphBulanan(resp.data)
                 }
             })
+        $.get("{{ route('graph.kasusBulanan2') }}",
+            function(resp) {
+                if (resp.status) {
+                    graphBulanan2(resp.data)
+                }
+            })
 
         function graphBulanan(data) {
             Highcharts.chart('grafikBulanan', {
@@ -213,8 +228,50 @@
                 },
                 plotOptions: {
                     column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: data
+            });
+        }
+
+        function graphBulanan2(data) {
+            Highcharts.chart('grafikBulanan2', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Rekap Kasus Bulanan'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+                        'Dec'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Kasus'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y} kasus</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true
+                        }
                     }
                 },
                 series: data

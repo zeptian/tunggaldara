@@ -26,7 +26,27 @@ class GraphController extends Controller
                 $dd[] = $value->jml;
             }
         }
-        $data = [["name" => "DBD", "data" => $dbd], ["name" => "DD", "data" => $dd]];
+        $data = [["name" => "DD", "data" => $dd], ["name" => "DBD", "data" => $dbd]];
+        return response()->json(["status" => true, "data" => $data]);
+    }
+
+    public function kasusBulananPM(Request $request)
+    {
+        $tahun = $request->tahun == '' ? date('Y') : $request->tahun;
+        $dataRaw = DB::table("kasus")->selectRaw("status, month(tegak) as bulan, count(*) as jml")
+            ->whereYear('tegak', $tahun)->groupBy('status', 'bulan')->get();
+        $p = [];
+        $m = [];
+        $i = 1;
+        foreach ($dataRaw as $key => $value) {
+            if (trim($value->status) == "P") {
+                $dbd[] = $value->jml;
+            }
+            if (trim($value->status) == "M") {
+                $dd[] = $value->jml;
+            }
+        }
+        $data = [["name" => "Penderita", "data" => $p], ["name" => "Meninggal", "data" => $m]];
         return response()->json(["status" => true, "data" => $data]);
     }
 }

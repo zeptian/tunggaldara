@@ -102,5 +102,6 @@ Route::group(['middleware' => 'auth'], function ($route) {
 
 
 Route::get('/graph/kasus_bulanan', 'GraphController@kasusBulanan')->name("graph.kasusBulanan");
+Route::get('/graph/kasus_bulanan2', 'GraphController@kasusBulanan2')->name("graph.kasusBulanan2");
 
 Route::get('test', 'TestWsController@test');
