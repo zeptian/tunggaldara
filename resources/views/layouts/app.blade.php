@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
     @yield('css')
 </head>
@@ -51,9 +52,19 @@
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
-
+        <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
         <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('js/exportexcel.js') }}"></script>
+        <script>
+            $(".datepicker").daterangepicker({
+                singleDatePicker: true,
+                autoApply: true,
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
+            })
+        </script>
         <script>
             const Toast = Swal.mixin({
                 toast: true,

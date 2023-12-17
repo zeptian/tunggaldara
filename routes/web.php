@@ -43,6 +43,13 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::put('/pe/{idk}/edit', 'PeController@update')->name('pe.update');
     Route::delete('/pe/{idk}', 'PeController@destroy')->name('pe.destroy');
 
+    Route::get('/fogging', 'FoggingController@index')->name('fogging');
+    Route::get('/fogging/{idpe}', 'FoggingController@create')->name('fogging.create');
+    Route::post('/fogging/{idpe}', 'FoggingController@store')->name('fogging.store');
+    Route::get('/fogging/{idpe}/edit', 'FoggingController@edit')->name('fogging.edit');
+    Route::put('/fogging/{idpe}/edit', 'FoggingController@update')->name('fogging.update');
+    Route::delete('/fogging/{idpe}', 'FoggingController@destroy')->name('fogging.destroy');
+
     Route::get('/pjr', 'PjrController@index')->name('pjr');
     Route::get('/pjr/rekap', 'PjrController@index')->name('pjr.rekap');
     Route::get('/pjr/tambah', 'PjrController@create')->name('pjr.create');

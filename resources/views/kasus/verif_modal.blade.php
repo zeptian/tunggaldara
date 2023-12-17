@@ -18,8 +18,33 @@
                             <td>{{ $pasien->ortu }}</td>
                         </tr>
                         <tr>
-                            <td>Alamat</td>
-                            <td>{{ $pasien->alamat . ' RT/RW:' . $pasien->rtrw }}</td>
+                            <td>Alamat Domisili</td>
+                            <td colspan="3">
+                                <textarea class="form-control" name="alamat" id="alamat">{{ $pasien->alamat }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kelurahan</td>
+                            <td>
+                                <select class="form-control select2" name="kelurahan" id="kelurahan">
+                                    @foreach ($kelurahan as $item)
+                                        @if ($item->kode == strtoupper($pasien->kdesa))
+                                            <option selected value="{{ $item->kode }}">{{ $item->nama }}</option>
+                                        @else
+                                            <option value="{{ $item->kode }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>RT/RW</td>
+                            <td><input class="form-control" type="text" id="rtrw" name="rtrw"
+                                    value="{{ $pasien->rtrw }}" /> </td>
+                        </tr>
+                        <tr>
+                            <td>Alamat KTP</td>
+                            <td colspan="3">
+                                <textarea class="form-control" name="alamat_ktp" id="alamat_ktp">{{ $pasien->alamat_ktp }}</textarea>
+                            </td>
                         </tr>
                     </table>
                     <h3>Hasil Pemeriksaan</h3>
@@ -156,24 +181,31 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script>
-    $("#formVerif").submit(function(e) {
-        e.preventDefault();
-        var data = objectifyForm($('#formVerif').serializeArray());
-        data._token = '{{ csrf_token() }}'
-        data._method = 'PUT'
-        $.post("{{ route('kasus.verif.save', ['idk' => $kasus->idp]) }}",
-            data,
-            function(data) {
-                if (data.status) {
-                    Swal.fire(data.message, '', 'success');
-                    window.location.reload();
-                } else {
-                    console.log(data.message)
-                    Swal.fire('Gagal Verif', data.message, 'error');
-                }
-            })
-    })
+    $(document).ready(function() {
+        $('.select2').select2();
+        $("#formVerif").submit(function(e) {
+            e.preventDefault();
+            var data = objectifyForm($('#formVerif').serializeArray());
+            data._token = '{{ csrf_token() }}'
+            data._method = 'PUT'
+            $.post("{{ route('kasus.verif.save', ['idk' => $kasus->idp]) }}",
+                data,
+                function(data) {
+                    if (data.status) {
+                        Swal.fire(data.message, '', 'success');
+                        window.location.reload();
+                    } else {
+                        console.log(data.message)
+                        Swal.fire('Gagal Verif', data.message, 'error');
+                    }
+                })
+        })
+
+    });
 
     function objectifyForm(formArray) {
         //serialize data function

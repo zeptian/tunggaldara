@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kasus;
+use App\Kelurahan;
 use App\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -185,7 +186,8 @@ class KasusController extends Controller
     {
         $pasien = Pasien::find($idp);
         $kasus = Kasus::where('idp', (int)$idp)->first();
-        return view('kasus.verif_modal', ['pasien' => $pasien, 'kasus' => $kasus]);
+        $kelurahan = Kelurahan::get();
+        return view('kasus.verif_modal', ['pasien' => $pasien, 'kasus' => $kasus, 'kelurahan' => $kelurahan]);
     }
     public function verifSave($idp, Request $request)
     {
@@ -223,6 +225,13 @@ class KasusController extends Controller
         $kasus->ns1             = $request->ns1;
         $kasus->diag_akhir      = $request->diag_akhir;
         $kasus->tgl_verifikasi  = date("Y-m-d");
+
+        $pasien = Pasien::find($idp);
+        $pasien->alamat = $request->alamat;
+        $pasien->kdesa = $request->kelurahan;
+        $pasien->rtrw = $request->rtrw;
+        $pasien->alamat_ktp = $request->alamat_ktp;
+        $pasien->save();
 
         if ($kasus->save()) {
             return response()->json(["status" => true, "message" => "Data berhasil disimpan"]);

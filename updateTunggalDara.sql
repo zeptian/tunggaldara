@@ -1,7 +1,7 @@
 ALTER TABLE `pasien`
 CHANGE `tgl_lahir` `tgl_lahir` date NULL AFTER `jkl`,
-CHANGE `latlong` `latlong` varchar(255) COLLATE 'latin1_swedish_ci' NULL AFTER `ortu`
-ADD `created_at` timestamp NULL,
+CHANGE `latlong` `latlong` varchar(255) COLLATE 'latin1_swedish_ci' NULL AFTER `ortu`,
+ADD `created_at` timestamp NULL AFTER `no_kontak`,
 ADD `updated_at` timestamp NULL AFTER `created_at`;
 
 ALTER TABLE `kasus`
@@ -35,7 +35,7 @@ CHANGE `diag_akhir` `diag_akhir` varchar(100) COLLATE 'latin1_swedish_ci' NULL A
 CHANGE `updated_at` `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP AFTER `created_at`;
 
 ALTER TABLE `kasus`
-CHANGE `trombosit` `trombosit_awal` int(11) NULL AFTER `gejala`,
-ADD `trombosit_tegak` int(11) NULL AFTER `trombosit_awal`,
+ADD `trombosit_awal` int(11) NULL AFTER `gejala`,
+CHANGE `trombosit` `trombosit_tegak` int(11) NULL AFTER `trombosit_awal`,
 ADD `hb_awal` varchar(100) COLLATE 'latin1_swedish_ci' NULL AFTER `ht_tegak`,
 CHANGE `updated_at` `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP AFTER `created_at`;
