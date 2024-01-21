@@ -70,10 +70,14 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="#" class="btn btn-sm btn-success">detail</a>
-                                    <a href="#" class="btn btn-sm btn-warning"
-                                        onclick="verif('{{ $item->idp }}')">verifikasi</a>
-                                    <a href="#" class="btn btn-sm btn-danger"
-                                        onclick="hapus('{{ $item->idp }}','{{ $item->pasien->nama }}')">hapus</a>
+                                    @if (Auth::user()->role == 'admin')
+                                        <a href="#" class="btn btn-sm btn-warning"
+                                            onclick="verif('{{ $item->idp }}')">verifikasi</a>
+                                    @endif
+                                    @if (Auth::user()->role == 'admin' || Auth::user()->faskes == $item->rs)
+                                        <a href="#" class="btn btn-sm btn-danger"
+                                            onclick="hapus('{{ $item->idp }}','{{ $item->pasien->nama }}')">hapus</a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

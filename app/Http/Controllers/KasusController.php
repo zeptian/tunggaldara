@@ -20,37 +20,33 @@ class KasusController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if ($user->kode == "dkk") {
-            $request->start = $request->start ?? date('01-m-Y');
-            $request->end = $request->end ?? date('d-m-Y');
-            $kasus = Kasus::with('Pasien')
-                ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
-                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
-            if ($request->status_verifikasi != "all") {
-                if ($request->status_verifikasi == "verified") {
-                    $kasus = $kasus->where("diag_akhir", "!=", "");
-                } else {
-                    $kasus = $kasus->where("diag_akhir", "");
-                }
+
+        $request->start = $request->start ?? date('01-m-Y');
+        $request->end = $request->end ?? date('d-m-Y');
+
+        $kasus = Kasus::join('pasien', 'pasien.id', '=', 'kasus.idp')
+            ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
+            ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
+        if ($user->role == "rs") {
+            $faskes = $user->faskes;
+            $kasus = $kasus->where('rs', $faskes);
+        } else if ($user->role == "puskesmas") {
+            $kode = $user->kode;
+            $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
+            foreach ($kels as $k => $v) {
+                $kels[] = $v->kode;
             }
-            $kasus = $kasus->get();
-        } else {
-            $faskes = $user->kode;
-            $request->start = $request->start ?? date('01-m-Y');
-            $request->end = $request->end ?? date('d-m-Y');
-            $kasus = Kasus::with('pasien')
-                ->where('rs', $faskes)
-                ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
-                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
-            if ($request->status_verifikasi != "all") {
-                if ($request->status_verifikasi == "verified") {
-                    $kasus = $kasus->where("diag_akhir", "!=", "");
-                } else {
-                    $kasus = $kasus->where("diag_akhir", "");
-                }
-            }
-            $kasus = $kasus->get();
+            $kasus = $kasus->whereIn('pasien.kdesa', $kels);
         }
+
+        if ($request->status_verifikasi != "all") {
+            if ($request->status_verifikasi == "verified") {
+                $kasus = $kasus->where("diag_akhir", "!=", "");
+            } else {
+                $kasus = $kasus->where("diag_akhir", "");
+            }
+        }
+        $kasus = $kasus->get();
         // dd($kasus);
         return view('kasus.rekap', ['kasus' => $kasus, 'request' => $request]);
     }

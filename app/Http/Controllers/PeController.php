@@ -23,7 +23,7 @@ class PeController extends Controller
             return redirect()->route('pe', ['start' => date('01-m-Y'), 'end' => date('d-m-Y')]);
         }
         $user = Auth::user();
-        if ($user->level == 'puskesmas') {
+        if ($user->role == 'puskesmas') {
             $kode = $user->kode;
             $kels = Kelurahan::select('kode')->where('kode_p', $kode)->get();
             foreach ($kels as $k => $v) {
@@ -43,7 +43,7 @@ class PeController extends Controller
             $pasien = $pasien->where('tgl_pe', null);
         }
 
-        if ($user->level == 'puskesmas') {
+        if ($user->role == 'puskesmas') {
             $pasien = $pasien->whereIn('kdesa', $kels);
         }
         $pasien = $pasien->orderBy('tgl_lp', 'asc')->get();
@@ -179,7 +179,7 @@ class PeController extends Controller
         if ($start == '' || $end == '') {
             return redirect()->route('pe.kecepatan', ['start' => date('01-m-Y'), 'end' => date('d-m-Y')]);
         }
-        $kecepatanPe = Pe::kecepatanPe(date("Y-m-d",strtotime($start)), date("Y-m-d",strtotime($end)))->get();
+        $kecepatanPe = Pe::kecepatanPe(date("Y-m-d", strtotime($start)), date("Y-m-d", strtotime($end)))->get();
         // dd($kecepatanPe);
         return view('pe.rekap_kecepatan', ['kecepatanPe' => $kecepatanPe, 'request' => $request]);
     }

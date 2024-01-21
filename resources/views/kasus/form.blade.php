@@ -207,7 +207,7 @@
                 <div class="col-md-4">
                     <input type="text" name="rs" id="rs"
                         class="form-control {{ $errors->has('rs') ? 'is-invalid' : '' }}"
-                        value="{{ $kasus->rs ?? old('rs') }}">
+                        value="{{ Auth::user()->faskes }}" readonly>
                 </div>
                 @if ($errors->has('rs'))
                     <div class="invalid-feedback">
