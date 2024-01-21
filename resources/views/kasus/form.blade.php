@@ -410,14 +410,14 @@
                         </div>
                     @endif
                 </div>
-                <label for="trombosit_tegak" class="col-md-2">Trombosit Tegak</label>
+                <label for="trombosit" class="col-md-2">Trombosit Tegak</label>
                 <div class="col-md-4">
-                    <input type="text" name="trombosit_tegak" id="trombosit_tegak"
-                        class="form-control {{ $errors->has('trombosit_tegak') ? 'is-invalid' : '' }}"
-                        value="{{ $kasus->trombosit_tegak ?? old('trombosit_tegak') }}">
-                    @if ($errors->has('trombosit_tegak'))
+                    <input type="text" name="trombosit" id="trombosit"
+                        class="form-control {{ $errors->has('trombosit') ? 'is-invalid' : '' }}"
+                        value="{{ $kasus->trombosit ?? old('trombosit') }}">
+                    @if ($errors->has('trombosit'))
                         <div class="invalid-feedback">
-                            <strong>{{ $errors->first('trombosit_tegak') }}</strong>
+                            <strong>{{ $errors->first('trombosit') }}</strong>
                         </div>
                     @endif
                 </div>

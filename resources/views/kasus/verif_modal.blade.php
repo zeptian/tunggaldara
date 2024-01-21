@@ -90,7 +90,7 @@
                             <td><input type="text" name="trombosit_awal" value="{{ $kasus->trombosit_awal }}"
                                     class="form-control" /></td>
                             <td>Trombosit Tegak</td>
-                            <td><input type="text" name="trombosit_tegak" value="{{ $kasus->trombosit_tegak }}"
+                            <td><input type="text" name="trombosit" value="{{ $kasus->trombosit }}"
                                     class="form-control" /></td>
                         </tr>
                         <tr>

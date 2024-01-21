@@ -19,6 +19,16 @@
                     <div class="col-md-2">
                         <input type="text" class="form-control datepicker" name="end" value="{{ $request->end }}" />
                     </div>
+                    
+                    <label class="col-md-1">Verifikasi</label>
+                    <div class="col-md-2">
+                        <select name="status_verifikasi" class="form-control">
+                            <option value="all">Semua</option>
+                            <option value="verified">Sudah diverifikasi</option>
+                            <option value="non-verified">Belum diverifikasi</option>
+                        </select>
+                    </div>
+                    
                     <div class="col-md-2">
                         <button class="btn btn-primary btn-sm" type="submit">Telusur</button>
                     </div>

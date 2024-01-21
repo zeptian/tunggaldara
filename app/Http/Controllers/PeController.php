@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class PeController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
     public function index(Request $request)
     {
         $start = $request->start;
@@ -162,5 +166,21 @@ class PeController extends Controller
         $pe->save();
         dd($pe);
         return redirect()->route('kasus');
+    }
+
+    function kecepatanPe(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->role == 'puskesmas') {
+            return redirect()->route('home');
+        }
+        $start = $request->start;
+        $end = $request->end;
+        if ($start == '' || $end == '') {
+            return redirect()->route('pe.kecepatan', ['start' => date('01-m-Y'), 'end' => date('d-m-Y')]);
+        }
+        $kecepatanPe = Pe::kecepatanPe(date("Y-m-d",strtotime($start)), date("Y-m-d",strtotime($end)))->get();
+        // dd($kecepatanPe);
+        return view('pe.rekap_kecepatan', ['kecepatanPe' => $kecepatanPe, 'request' => $request]);
     }
 }

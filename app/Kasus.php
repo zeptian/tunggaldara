@@ -10,7 +10,7 @@ class Kasus extends Model
 {
     //    
     protected $table = "kasus";
-    protected $fillable = ['no_rm', 'nama', 'ortu', 'latlong', 'kdesa', 'rtrw', 'alamat', 'alamat_ktp', 'jkl', 'tgl_lahir', 'nama_kontak', 'relasi', 'no_kontak'];
+    // protected $fillable = ['no_rm', 'nama', 'ortu', 'latlong', 'kdesa', 'rtrw', 'alamat', 'alamat_ktp', 'jkl', 'tgl_lahir', 'nama_kontak', 'relasi', 'no_kontak'];
 
     public function Pasien()
     {
@@ -20,6 +20,7 @@ class Kasus extends Model
     public static function rekapKasusDbd($wilayah, $periode)
     {
         $kasus = DB::table('kasus_rinci as k')
+            ->leftjoin("penduduk","penduduk.kdesa","=","k.kdesa")
             ->selectRaw($wilayah . ",sum(if(month(tegak)=1,1,0)) P1,
                     sum(if(month(tegak)=1 and status='M',1,0)) M1,
                     sum(if(month(tegak)=2,1,0)) P2,

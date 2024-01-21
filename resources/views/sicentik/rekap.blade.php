@@ -7,6 +7,9 @@
         <div class="card-header">
             <h4>Rekap Laporan SiCentik</h4>
         </div>
+        <div class="card-tools">
+            <a class="btn btn-success" href="{{ route('sicentik.create') }}">Tambah Data</a>
+        </div>
         <div class="card-body of-scroll">
             <form>
                 <div class="form-group row">

@@ -1,14 +1,16 @@
 @extends('home')
 
 @section('content')
-    <h3>Laporan Monev PJN</h3>
+    <h3>SRSJ</h3>
     <hr />
     <div class="card">
         <div class="card-header">
-            <h4>Rekap Laporan Monev PJN</h4>
-        </div>
-        <div class="card-tools">
-            <a class="btn btn-success" href="{{ route('monev_pjn.create') }}">Tambah Data</a>
+            <div class="user-block">
+                <h4>Lapor Satu Rumah Satu Jumantik</h4>
+            </div>
+            <div class="card-tools">
+                <a class="btn btn-success" href="{{ route('srsj.create') }}">Tambah Data</a>
+            </div>
         </div>
         <div class="card-body of-scroll">
             <form>
@@ -44,62 +46,60 @@
                     </div>
                 </div>
             </form>
+            <hr />
             <table class="table table-striped datatable">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Puskesmas</th>
-                        <th>Tanggal Kegiatan</th>
-                        <th>Kelurahan</th>
-                        <th>RW</th>
-                        <th>Jml bangunan dipantau jentik</th>
-                        <th>Jml bangunan positif jentik</th>
-                        <th>ABJ</th>
-                        <th>Jml kontainer diperiksa (dalam bangunan)</th>
-                        <th>jml kontainer positif (dalam bangunan)</th>
-                        <th>Jml kontainer diperiksa (luar bangunan)</th>
-                        <th>jml kontainer positif (luar bangunan)</th>
-                        <th>Jml bangunan pasang perangkap</th>
-                        <th>Jml tikus tertangkap</th>
-                        <th>Jml larvasida (gr)</th>
-                        <th>Apel sebelum kegiatan</th>
-                        <th>Pimpinan PSN Serentak</th>
-                        <th>Evaluasi setelah kegiatan</th>
-                        <th>Jabatan Pimpinan Apel</th>
-                        <th>Sirine</th>
+                        <th>Tahun</th>
+                        <th>Bulan</th>
+                        <th>Jumlah Target Lokasi SRSJ</th>
+                        <th>Jumlah Total Bangunan Target SRSJ</th>
+                        <th>Jumlah Jumantik Rumah yang Mengisi Kartu SRSJ</th>
+                        <th>Jumlah Koordinator RT</th>
+                        <th>ABJ Jumantik</th>
+                        <th>ABJ Koordinator RT</th>
+                        <th>ABJ Petugas Kesehatan (Puskesmas) </th>
+                        <th>Jumlah Kasus DD di Lokasi SRSJ</th>
+                        <th>Jumlah Kasus DBD di Lokasi SRSJ</th>
+                        <th>Jumlah Kasus DSS di Lokasi SRSJ</th>
+                        <th>Lampiran</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($monevPjn as $item)
+                    @foreach ($srsj as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->puskesmas }}</td>
-                            <td>{{ $item->tgl_kegiatan }}</td>
-                            <td>{{ $item->kelurahan }}</td>
-                            <td>{{ $item->rw }}</td>
-                            <td>{{ $item->bangunan_pantau }}</td>
-                            <td>{{ $item->bangunan_positif }}</td>
-                            <td>{{ $item->bangunan_pantau > 0 ? round((($item->bangunan_pantau - $item->bangunan_positif) / $item->bangunan_pantau) * 100, 2) : '-' }}
+                            <td>{{ $item->tahun }}</td>
+                            <td>{{ $item->bulan }}</td>
+                            <td>{{ $item->jml_target_lokasi }}</td>
+                            <td>{{ $item->jml_total_bangunan }}</td>
+                            <td>{{ $item->jml_jumantik }}</td>
+                            <td>{{ $item->jml_koord }}</td>
+                            <td>{{ $item->abj_jumantik }}</td>
+                            <td>{{ $item->abj_koord }}</td>
+                            <td>{{ $item->abj_nakes }}</td>
+                            <td>{{ $item->jml_dd }}</td>
+                            <td>{{ $item->jml_dbd }}</td>
+                            <td>{{ $item->jml_dss }}</td>
+                            <td>
+                                @if (is_numeric($item->lampiran))
+                                    <a target="_blank" href="#linkToDownload?tbl=srsj_lampiran&id={{ $item->lampiran }}"
+                                        class="btn btn-sm btn-success">Download</a>
+                                @else
+                                    <a target="_blank" href="{{ asset($item->lampiran) }}"
+                                        class="btn btn-sm btn-success">Download</a>
+                                @endif
                             </td>
-                            <td>{{ $item->kontainer_dalam_periksa }}</td>
-                            <td>{{ $item->kontainer_dalam_positif }}</td>
-                            <td>{{ $item->kontainer_luar_periksa }}</td>
-                            <td>{{ $item->kontainer_luar_positif }}</td>
-                            <td>{{ $item->perangkap_tikus }}</td>
-                            <td>{{ $item->tikus_ditangkap }}</td>
-                            <td>{{ $item->larvasida }}</td>
-                            <td>{{ $item->apel }}</td>
-                            <td>{{ $item->pimpinan_pjn }}</td>
-                            <td>{{ $item->jabatan }}</td>
-                            <td>{{ $item->evaluasi }}</td>
-                            <td>{{ $item->sirine }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('monev_pjn.edit', ['id' => $item->id]) }}"
+                                    <a href="{{ route('pjn.edit', ['id' => $item->id]) }}"
                                         class="btn btn-sm btn-warning">edit</a>
                                     <a href="#" class="btn btn-sm btn-danger"
-                                        onclick="hapus('{{ $item->id }}','{{ $item->tgl_kegiatan }}','{{ $item->kelurahan }}')">hapus</a>
+                                        onclick="hapus('{{ $item->id }}','{{ $item->kdesa }}','{{ $item->bulan }}')">hapus</a>
                                 </div>
                             </td>
                         </tr>
@@ -118,11 +118,13 @@
     <script>
         $(document).ready(function() {
             $(".datatable").dataTable();
+
         })
 
-        function hapus(id, tgl, kel) {
+        function hapus(id, kelurahan, bulan) {
             Swal.fire({
-                title: 'Apakah anda ingin menghapus Monev PJN pada ' + kel + " tanggal " + tgl + '?',
+                title: 'Apakah anda ingin menghapus data PJR kelurahan ' + kelurahan + " bulan " +
+                    bulan + '?',
                 icon: 'warning',
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -132,7 +134,7 @@
                 denyButtonText: `Tidak`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.post("{{ URL::to('/monev_pjn') }}/" + id, {
+                    $.post("{{ URL::to('/pjn') }}/" + id, {
                             _token: '{{ csrf_token() }}',
                             _method: 'delete'
                         },

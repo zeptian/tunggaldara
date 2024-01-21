@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::delete('/kasus/{idk}', 'KasusController@destroy')->name('kasus.destroy');
 
     Route::get('/pe', 'PeController@index')->name('pe');
+    Route::get('/pe/kecepatan', 'PeController@kecepatanPe')->name('pe.kecepatan');
     Route::get('/pe/{idk}', 'PeController@create')->name('pe.create');
     Route::post('/pe/{idk}', 'PeController@store')->name('pe.store');
     Route::get('/pe/{idk}/edit', 'PeController@edit')->name('pe.edit');

@@ -129,6 +129,11 @@
                                 Kecepatan Pelaporan
                             </a>
                         </li>
+                        <li class="list-group-item">
+                            <a href="{{ route('pe.kecepatan') }}" class="stretched-link">
+                                Kecepatan PE
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -25,8 +25,15 @@ class KasusController extends Controller
             $request->end = $request->end ?? date('d-m-Y');
             $kasus = Kasus::with('Pasien')
                 ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
-                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)))
-                ->get();
+                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
+            if ($request->status_verifikasi!="all") {
+                if ($request->status_verifikasi == "verified") {
+                    $kasus->where("diag_akhir",<>,"")
+                }else{
+                    $kasus->where("diag_akhir","")
+                }
+            }
+            $kasus->get();
         } else {
             $faskes = $user->kode;
             $request->start = $request->start ?? date('01-m-Y');
@@ -35,7 +42,14 @@ class KasusController extends Controller
                 ->where('rs', $faskes)
                 ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
                 ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)))
-                ->get();
+            if ($request->status_verifikasi!="all") {
+                if ($request->status_verifikasi == "verified") {
+                    $kasus->where("diag_akhir",<>,"")
+                }else{
+                    $kasus->where("diag_akhir","")
+                }
+            }
+            $kasus->get();
         }
         return view('kasus.rekap', ['kasus' => $kasus, 'request' => $request]);
     }
@@ -93,7 +107,7 @@ class KasusController extends Controller
         $kasus->uji_rl = $request->uji_rl;
         $kasus->gejala = implode(",", $request->gejala);
         $kasus->trombosit_awal = $request->trombosit_awal;
-        $kasus->trombosit_tegak = $request->trombosit_tegak;
+        $kasus->trombosit = $request->trombosit;
         $kasus->ht_awal = $request->ht_awal;
         $kasus->ht_tegak = $request->ht_tegak;
         $kasus->hb_awal = $request->hb_awal;
@@ -193,7 +207,7 @@ class KasusController extends Controller
     {
         $rules = [
             'trombosit_awal' => 'required',
-            'trombosit_tegak' => 'required',
+            'trombosit' => 'required',
             'hb_awal' => 'required',
             'hb_tegak' => 'required',
             'ht_awal' => 'required',
@@ -215,7 +229,7 @@ class KasusController extends Controller
         }
         $kasus = Kasus::where('idp', (int)$idp)->first();
         $kasus->trombosit_awal  = $request->trombosit_awal;
-        $kasus->trombosit_tegak = $request->trombosit_tegak;
+        $kasus->trombosit = $request->trombosit;
         $kasus->hb_awal         = $request->hb_awal;
         $kasus->hb_tegak        = $request->hb_tegak;
         $kasus->ht_awal         = $request->ht_awal;

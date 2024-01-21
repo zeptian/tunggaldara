@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-striped">
+            <table class="table table-striped" id="data">
                 <thead>
                     <tr>
                         <th rowspan="3">No</th>
@@ -103,6 +103,17 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            @isset($rekap)
+                <div class="form-group">
+                    <a id="dlink" style="display:none;"></a>
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-primary" name="export" value="export"
+                            onclick="tableToExcel('data', 'name', 'rekap_kasus_{{ $request->kasus }}_rs.xls')">EXPORT</button>
+                    </div>
+                </div>
+            @endisset
         </div>
     </div>
 @endsection
