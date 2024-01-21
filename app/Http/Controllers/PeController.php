@@ -164,7 +164,7 @@ class PeController extends Controller
         $pe->dbd            = $request->dbd;
         $pe->dss            = $request->dss;
         $pe->save();
-        dd($pe);
+
         return redirect()->route('kasus');
     }
 

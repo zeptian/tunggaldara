@@ -26,14 +26,14 @@ class KasusController extends Controller
             $kasus = Kasus::with('Pasien')
                 ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
                 ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
-            if ($request->status_verifikasi!="all") {
+            if ($request->status_verifikasi != "all") {
                 if ($request->status_verifikasi == "verified") {
-                    $kasus->where("diag_akhir",<>,"")
-                }else{
-                    $kasus->where("diag_akhir","")
+                    $kasus = $kasus->where("diag_akhir", "!=", "");
+                } else {
+                    $kasus = $kasus->where("diag_akhir", "");
                 }
             }
-            $kasus->get();
+            $kasus = $kasus->get();
         } else {
             $faskes = $user->kode;
             $request->start = $request->start ?? date('01-m-Y');
@@ -41,16 +41,17 @@ class KasusController extends Controller
             $kasus = Kasus::with('pasien')
                 ->where('rs', $faskes)
                 ->where('tgl_lp', '>=', date("Y-m-d", strtotime($request->start)))
-                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)))
-            if ($request->status_verifikasi!="all") {
+                ->where('tgl_lp', '<=',  date("Y-m-d", strtotime($request->end)));
+            if ($request->status_verifikasi != "all") {
                 if ($request->status_verifikasi == "verified") {
-                    $kasus->where("diag_akhir",<>,"")
-                }else{
-                    $kasus->where("diag_akhir","")
+                    $kasus = $kasus->where("diag_akhir", "!=", "");
+                } else {
+                    $kasus = $kasus->where("diag_akhir", "");
                 }
             }
-            $kasus->get();
+            $kasus = $kasus->get();
         }
+        // dd($kasus);
         return view('kasus.rekap', ['kasus' => $kasus, 'request' => $request]);
     }
 

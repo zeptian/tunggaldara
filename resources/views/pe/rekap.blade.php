@@ -66,7 +66,7 @@
                             <td>{{ $item->idk }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
                             <td>{{ $item->alamat }}</td>
-                            <td>{{ $item->kdesa }}</td>
+                            <td>{{ kelurahan($item->kdesa) }}</td>
                             <td>{{ $item->rs }}</td>
                             <td>{{ $item->jenis }}</td>
                             <td>{{ $item->diag_akhir }}</td>

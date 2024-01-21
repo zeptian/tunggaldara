@@ -19,7 +19,7 @@
                     <div class="col-md-2">
                         <input type="text" class="form-control datepicker" name="end" value="{{ $request->end }}" />
                     </div>
-                    
+
                     <label class="col-md-1">Verifikasi</label>
                     <div class="col-md-2">
                         <select name="status_verifikasi" class="form-control">
@@ -28,7 +28,7 @@
                             <option value="non-verified">Belum diverifikasi</option>
                         </select>
                     </div>
-                    
+
                     <div class="col-md-2">
                         <button class="btn btn-primary btn-sm" type="submit">Telusur</button>
                     </div>
@@ -63,7 +63,7 @@
                             <td>{{ $item->idk }}</td>
                             <td>{{ $item->tgl_lahir }}</td>
                             <td>{{ $item->pasien->alamat }}</td>
-                            <td>{{ $item->pasien->kdesa }}</td>
+                            <td>{{ kelurahan($item->pasien->kdesa) }}</td>
                             <td>{{ $item->rs }}</td>
                             <td>{{ $item->jenis }}</td>
                             <td>{{ $item->diag_akhir }}</td>
