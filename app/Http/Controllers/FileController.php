@@ -20,10 +20,11 @@ class FileController extends Controller
             'id'  => 'required|min:1'
         ]);
 
-        $data = DB::table($request->tbl)->first($request->id);
+        $data = DB::table($request->tbl)->find($request->id);
 
-        $file = 'tmp/lampiran.' . $data->file_ext;
+        $file = 'lampiran/' . $request->tbl . "." . $data->file_ext;
         file_put_contents($file, $data->lampiran);
-        return header('location:' . $file);
+        // return header('location:' . $file);
+        return redirect(asset($file));
     }
 }

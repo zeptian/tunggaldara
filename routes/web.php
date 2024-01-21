@@ -106,6 +106,8 @@ Route::group(['middleware' => 'auth'], function ($route) {
     Route::get('/srsj/{id}/edit', 'SrsjController@edit')->name('srsj.edit');
     Route::put('/srsj/{id}/edit', 'SrsjController@update')->name('srsj.update');
     Route::delete('/srsj/{id}', 'SrsjController@destroy')->name('srsj.destroy');
+
+    Route::get('/file', 'FileController@getFileDb')->name('file.download');
 });
 
 

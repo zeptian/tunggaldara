@@ -52,8 +52,9 @@ class SrsjController extends Controller
             'jml_dd'    => 'required|min:0',
             'jml_dbd'   => 'required|min:0',
             'jml_dss'   => 'required|min:0',
-            'lampiran'  => 'max:10000|mimes:xls,xlsx'
+            'lampiran'  => 'max:10000|mimes:xls,xlsx',
         ]);
+        // dd($request->lampiran->getMimeType(), $request->lampiran->getClientOriginalExtension());
 
         $user = Auth::user();
         $srsj = new Srsj();
@@ -74,11 +75,10 @@ class SrsjController extends Controller
         if ($request->lampiran != "") {
             $file = $request->lampiran;
             $tujuan = "lampiran/srsj";
-            $file->move($tujuan, "srsj_".$user->kode.date("YmdHis").$file->getClientOriginalExtension());
-            $path = $tujuan."/srsj_".$user->kode.date("YmdHis").$file->getClientOriginalExtension();
+            $file->move($tujuan, "srsj_" . $user->kode . date("YmdHis") . "." . $file->getClientOriginalExtension());
+            $path = $tujuan . "/srsj_" . $user->kode . date("YmdHis") . "." . $file->getClientOriginalExtension();
+            $srsj->lampiran             = $path;
         }
-
-        $srsj->lampiran             = $path;
         $srsj->save();
 
         return redirect()->route('srsj');
@@ -127,8 +127,8 @@ class SrsjController extends Controller
         if ($request->lampiran != "") {
             $file = $request->lampiran;
             $tujuan = "lampiran/srsj";
-            $file->move($tujuan, "srsj_".$user->kode.date("YmdHis").$file->getClientOriginalExtension());
-            $path = $tujuan."/srsj_".$user->kode.date("YmdHis").$file->getClientOriginalExtension();
+            $file->move($tujuan, "srsj_" . $user->kode . date("YmdHis") . "." . $file->getClientOriginalExtension());
+            $path = $tujuan . "/srsj_" . $user->kode . date("YmdHis") . "." . $file->getClientOriginalExtension();
             $srsj->lampiran             = $path;
         }
 

@@ -87,7 +87,8 @@
                             <td>{{ $item->jml_dss }}</td>
                             <td>
                                 @if (is_numeric($item->lampiran))
-                                    <a target="_blank" href="#linkToDownload?tbl=srsj_lampiran&id={{ $item->lampiran }}"
+                                    <a target="_blank"
+                                        href="{{ route('file.download', ['tbl' => 'srsj_lampiran', 'id' => $item->id]) }}"
                                         class="btn btn-sm btn-success">Download</a>
                                 @else
                                     <a target="_blank" href="{{ asset($item->lampiran) }}"
@@ -96,10 +97,10 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('pjn.edit', ['id' => $item->id]) }}"
+                                    <a href="{{ route('srsj.edit', ['id' => $item->id]) }}"
                                         class="btn btn-sm btn-warning">edit</a>
                                     <a href="#" class="btn btn-sm btn-danger"
-                                        onclick="hapus('{{ $item->id }}','{{ $item->kdesa }}','{{ $item->bulan }}')">hapus</a>
+                                        onclick="hapus('{{ $item->id }}','{{ puskesmas($item->puskesmas) }}','{{ $item->bulan }}')">hapus</a>
                                 </div>
                             </td>
                         </tr>
@@ -121,9 +122,9 @@
 
         })
 
-        function hapus(id, kelurahan, bulan) {
+        function hapus(id, puskesmas, bulan) {
             Swal.fire({
-                title: 'Apakah anda ingin menghapus data PJR kelurahan ' + kelurahan + " bulan " +
+                title: 'Apakah anda ingin menghapus data SRSJ puskesmas ' + puskesmas + " bulan " +
                     bulan + '?',
                 icon: 'warning',
                 confirmButtonColor: '#3085d6',
@@ -134,7 +135,7 @@
                 denyButtonText: `Tidak`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.post("{{ URL::to('/pjn') }}/" + id, {
+                    $.post("{{ URL::to('/srsj') }}/" + id, {
                             _token: '{{ csrf_token() }}',
                             _method: 'delete'
                         },

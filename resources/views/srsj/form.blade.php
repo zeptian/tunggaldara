@@ -9,10 +9,11 @@
         </div>
         <div class="card-body of-scroll">
             @if (!isset($srsj))
-                <form action="{{ route('srsj.create') }}" method="post">
+                <form action="{{ route('srsj.create') }}" method="post" enctype="multipart/form-data">
                     @csrf
                 @else
-                    <form action="{{ route('srsj.update', ['id' => $srsj->id]) }}" method="post">
+                    <form action="{{ route('srsj.update', ['id' => $srsj->id]) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
             @endif
@@ -149,8 +150,7 @@
             <div class="form-group row">
                 <label class="col-4 col-md-2">Lampiran</label>
                 <div class="col-8 col-md-4">
-                    <input type="number" name="lampiran" class="form-control"
-                        value="{{ old('lampiran') ?? ($srsj->lampiran ?? '') }}" />
+                    <input type="file" name="lampiran" class="form-control" />
                 </div>
             </div>
 
